@@ -41,8 +41,8 @@ let inlined = 0;
 for (const file of walk('public')) {
   const url = '/' + path.relative('public', file).split(path.sep).join('/');
   if (!out.includes(url)) continue;
-  // the home bundle carries the product data (incl. PDP hero paths) but never shows those heroes
-  if (page === 'index' && /\/img\/(paneer|rotli|thepla)-hero\.webp$|hero-alt/.test(url)) { out = out.replaceAll(url, ''); continue; }
+  // the home bundle carries the product data (incl. PDP hero + gallery paths) but never shows them
+  if (page === 'index' && /\/img\/(paneer|rotli|thepla)-(hero|g\d)\.webp$|hero-alt/.test(url)) { out = out.replaceAll(url, ''); continue; }
   out = out.replaceAll(url, dataUri(file)); inlined++;
 }
 out = out.replaceAll('</script', '<\\/script').replace(/<script type="module">\n([\s\S]*?)\n<\\\/script>/, (m, code) => `<script type="module">\n${code}\n</script>`);
