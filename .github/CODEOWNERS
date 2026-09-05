@@ -1,0 +1,5 @@
+# Who reviews what. GitHub asks the listed owner for review on pull requests that touch these paths.
+# Copy lives in src/content and belongs to Bansari. Everything else is the front end and belongs to Madhumita.
+*               @madhumita-krishnan
+/src/content/   @bansd
+/docs/          @madhumita-krishnan @bansd

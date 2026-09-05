@@ -1,0 +1,40 @@
+{
+  "_readme": "Copy on the product page that is the same for every product. Per-product words (names, taglines, descriptions, photo captions) live in products.json.",
+  "titleSuffix": "PRATUS",
+  "priceLabel": "per meal",
+  "addToCart": "Add to cart",
+  "addedToast": "added.",
+  "checkoutLink": "Checkout",
+  "shippingNote": "Ships frozen · Free shipping over $60",
+  "macros": {
+    "eyebrow": "Macros per meal",
+    "labels": { "cal": "calories", "protein": "protein", "carbs": "carbs", "fat": "fat" }
+  },
+  "info": {
+    "eyebrow": "What’s in the pouch",
+    "title": "Real food. Real macros.",
+    "second": "Made in small batches, frozen at peak, and already logged in MyFitnessPal so the only thing you have to track is your lift."
+  },
+  "heating": {
+    "eyebrow": "Heating instructions",
+    "steps": [
+      { "label": "Pan (recommended)", "text": "Remove parchment paper and heat on a pan until warm and soft." },
+      { "label": "Quick option", "text": "Microwave each piece between a paper towel for 10–15 seconds." },
+      { "label": "Track it", "text": "Log your meal in MyFitnessPal — just search “PRATUS”." },
+      { "label": "Storage", "text": "Keep frozen." }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "In the wild",
+    "title": "Look closer.",
+    "lead": "Shot where it gets eaten: the track, the turf, the blacktop.",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "close": "Close"
+  },
+  "others": {
+    "eyebrow": "More fuel",
+    "title": "Other fuel.",
+    "button": "View"
+  }
+}

@@ -408,6 +408,9 @@ GSAP equivalents: `power3.out` to arrive, `power4.out` for split words, `power3.
 
 ## 15. Voice
 
+All copy lives in `src/content/*.json` and is filled into the pages at build time (`scripts/vite-content.mjs`); the markup holds structure only. Headlines are typed in sentence case there and set in caps by the display font. `<strong>` is the one tag allowed inside a copy string.
+
+
 Short. Declarative. Gym-floor confidence, kitchen-table warmth. Product names keep their label prefix (**Push Day** Paneer Paratha, **Pr-otein** Rotli, **Thunder Thigh** Thepla). Site copy talks about **fuel**, not "days" ("Pick your fuel", "Other fuel"). Copy on packaging is canonical — reuse it verbatim where possible. Statements end with a full stop, even at display size ("Pick your fuel."). Eyebrows and chips don't.
 
 ---

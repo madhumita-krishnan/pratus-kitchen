@@ -1,0 +1,80 @@
+{
+  "_readme": "Everything written on the checkout page, including the empty-bag and order-placed states and the short messages (toasts) that pop up at the bottom of the screen.",
+  "meta": { "title": "Checkout — PRATUS" },
+  "head": {
+    "eyebrow": "Checkout",
+    "title": "Almost there.",
+    "lead": "Frozen at peak, packed cold, in your freezer this week."
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "newsletter": "Email me drops, restocks and new fuel"
+  },
+  "delivery": {
+    "title": "Delivery",
+    "first": "First name",
+    "last": "Last name",
+    "address": "Address",
+    "addressPlaceholder": "Street and number",
+    "address2": "Apt, suite",
+    "address2Hint": "optional",
+    "city": "City",
+    "state": "State",
+    "zip": "ZIP",
+    "phone": "Phone",
+    "phoneHint": "for the courier",
+    "speedLabel": "Delivery speed",
+    "free": "Free",
+    "note": "Ships Monday to Wednesday so it never sits in a depot over the weekend. Keep frozen on arrival."
+  },
+  "payment": {
+    "title": "Payment",
+    "testChip": "Test mode · nothing is charged",
+    "card": "Card",
+    "applePay": "Apple Pay",
+    "cardNumber": "Card number",
+    "expiry": "Expiry",
+    "expiryPlaceholder": "MM / YY",
+    "cvc": "Security code",
+    "cvcPlaceholder": "CVC",
+    "nameOnCard": "Name on card",
+    "appleNote": "You’ll confirm with Face ID or Touch ID on the next step.",
+    "placeOrder": "Place order · ",
+    "payApple": "Pay with Apple Pay · ",
+    "terms": "By placing an order you agree to our terms. Frozen food can’t be returned, but if anything arrives thawed we replace it, no questions.",
+    "failed": "We couldn’t place that order. Nothing was charged — try again in a moment."
+  },
+  "summary": {
+    "eyebrow": "Your order",
+    "meal": "meal",
+    "meals": "meals",
+    "remove": "Remove",
+    "quantityOf": "Quantity of",
+    "awayFromFree": "away from free standard shipping",
+    "freeUnlocked": "<b>Free standard shipping</b> unlocked",
+    "promoPlaceholder": "Promo code",
+    "promoButton": "Apply",
+    "promoEmpty": "Enter a code first.",
+    "promoNotLive": "isn’t live yet.",
+    "promoInvalid": "isn’t a valid code.",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total"
+  },
+  "empty": {
+    "eyebrow": "Nothing in the bag",
+    "title": "Your freezer is waiting.",
+    "lead": "Three plates, tracked to the gram. Pick one and we’ll pack it cold.",
+    "button": "Pick your fuel"
+  },
+  "done": {
+    "eyebrowPrefix": "Order",
+    "title": "Order in. Go lift.",
+    "leadBefore": "A confirmation is on its way to",
+    "leadMiddle": ". Your meals ship cold and land in",
+    "leadAfter": ".",
+    "button": "Back to the lineup"
+  }
+}

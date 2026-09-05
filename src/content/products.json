@@ -1,0 +1,66 @@
+{
+  "_readme": "The catalogue. One entry per product; the `slug` must not change (it is the product’s web address and the key the cart and the backend use). Copy is lifted from the pouch labels. Prices and shipping rates are placeholders until Pratiti signs off — change the numbers, not the keys.",
+  "products": [
+    {
+      "slug": "paneer-paratha",
+      "day": "Push Day",
+      "name": "Paneer Paratha",
+      "shortName": "Paneer Paratha",
+      "tagline": "Press heavier and recover smarter with our push-day-ready paneer paratha.",
+      "description": "A classic Punjabi flatbread stuffed with spiced, protein-rich paneer. Made to be eaten like a real meal, not a supplement — and tracked like one.",
+      "macros": { "cal": 470, "protein": 30, "carbs": 29, "fat": 26 },
+      "price": 14,
+      "gallery": [
+        { "cap": "Push day", "alt": "Push Day Paneer Paratha pouch held up mid-flex" },
+        { "cap": "Turf", "alt": "Paneer paratha pouch on turf with a dumbbell" },
+        { "cap": "Lane 4", "alt": "Paneer paratha pouch on the track" },
+        { "cap": "Rest day", "alt": "Founder lying on the track beside a paneer paratha pouch" },
+        { "cap": "Yard line", "alt": "Paneer paratha on the yard line" },
+        { "cap": "Founder", "alt": "Founder flexing with the paneer paratha pouch" }
+      ]
+    },
+    {
+      "slug": "rotli",
+      "day": "Pr-otein",
+      "name": "Rotli",
+      "shortName": "Rotli + Shaak",
+      "tagline": "Set a new personal record starting with lunch.",
+      "description": "Soft, tofu-based pr-otein rotlis paired with our Chin-Up Chana Bataka Shaak. The Gujarati home plate, rebuilt for training days.",
+      "macros": { "cal": 380, "protein": 19, "carbs": 37, "fat": 17 },
+      "price": 14,
+      "gallery": [
+        { "cap": "Handoff", "alt": "Rotli pouch handed off on the track" },
+        { "cap": "Turf", "alt": "Rotli pouch and shaak tub on turf with dumbbells" },
+        { "cap": "Court side", "alt": "Rotli pouch at the tennis net" },
+        { "cap": "Field", "alt": "Rotli pouch, shaak tub and dumbbell on the field" },
+        { "cap": "Rest day", "alt": "Founder on the track with rotli and shaak" },
+        { "cap": "Packed cold", "alt": "Rotli and shaak tubs packed in a cooler" }
+      ]
+    },
+    {
+      "slug": "thepla",
+      "day": "Thunder Thigh",
+      "name": "Thepla",
+      "shortName": "Thepla",
+      "tagline": "Fuel your leg day one bite at a time.",
+      "description": "A macro-tracked take on a classic Gujarati wholewheat and fenugreek flatbread. Savoury, portable, and built for the days that hurt.",
+      "macros": { "cal": 400, "protein": 21, "carbs": 39, "fat": 17 },
+      "price": 12,
+      "gallery": [
+        { "cap": "Turf", "alt": "Thepla pouch on turf with a dumbbell and phone" },
+        { "cap": "Blacktop", "alt": "Three thepla pouches on the blacktop" },
+        { "cap": "Yard line", "alt": "Thepla pouch beside a dumbbell on the yard line" },
+        { "cap": "Track", "alt": "Founder sitting on the track with thepla and paneer paratha" },
+        { "cap": "Rest day", "alt": "Founder on the track with a thepla pouch" },
+        { "cap": "Field", "alt": "Thepla pouch and dumbbell on the field" }
+      ]
+    }
+  ],
+  "shipping": {
+    "_note": "Placeholder rates. `freeOver` is the subtotal in dollars above which that method is free; null means never free.",
+    "methods": [
+      { "id": "standard", "label": "Standard", "note": "Frozen, insulated. 2–3 business days.", "price": 9, "freeOver": 60, "eta": "two to three business days" },
+      { "id": "express", "label": "Express", "note": "Next business day, ordered before noon.", "price": 18, "freeOver": null, "eta": "one business day" }
+    ]
+  }
+}

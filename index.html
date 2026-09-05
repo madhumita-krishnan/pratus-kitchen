@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PRATUS — Culture That Performs</title>
-  <meta name="description" content="Pratus Kitchen makes vegetarian, high-protein Indian meals. Real food, macro-tracked, ready in 90 seconds.">
+  <title>{{ home.meta.title }}</title>
+  <meta name="description" content="{{ home.meta.description }}">
   <meta name="theme-color" content="#0B0A0A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,9 +50,9 @@
   </a>
 
   <nav class="pill nav__links" aria-label="Primary">
-    <a href="#order">Order</a>
-    <a href="#story">Our Story</a>
-    <a href="#why">Why Us?</a>
+    <a href="#order">{{ site.nav.order }}</a>
+    <a href="#story">{{ site.nav.story }}</a>
+    <a href="#why">{{ site.nav.why }}</a>
   </nav>
 
   <div class="pill nav__actions">
@@ -64,12 +64,12 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
       </button>
       <div class="account__menu" id="account-menu" hidden>
-        <p class="eyebrow">Your account</p>
-        <p class="account__hello">Sign in to reorder in one tap.</p>
-        <a class="btn" href="#">Sign in</a>
+        <p class="eyebrow">{{ site.account.eyebrow }}</p>
+        <p class="account__hello">{{ site.account.signedOut }}</p>
+        <a class="btn" href="#">{{ site.account.signIn }}</a>
         <ul class="account__list">
-          <li><a href="#"><span>Track an order</span></a></li>
-          <li><a href="#"><span>Subscription</span><span class="chip">Soon</span></a></li>
+          <li><a href="#"><span>{{ site.account.trackOrder }}</span></a></li>
+          <li><a href="#"><span>{{ site.account.subscription }}</span><span class="chip">{{ site.account.soon }}</span></a></li>
         </ul>
       </div>
     </div>
@@ -91,10 +91,10 @@
       <h1 class="hero__wordmark" aria-label="PRATUS">
         <span aria-hidden="true">P</span><span aria-hidden="true">R</span><span aria-hidden="true">A</span><span aria-hidden="true">T</span><span aria-hidden="true">U</span><span aria-hidden="true">S</span>
       </h1>
-      <p class="hero__tag">Culture that performs</p>
+      <p class="hero__tag">{{ home.hero.tagline }}</p>
     </div>
 
-    <a class="hero__scroll" href="#order" aria-label="Scroll to content"><span>Scroll</span><i></i></a>
+    <a class="hero__scroll" href="#order" aria-label="Scroll to content"><span>{{ home.hero.scroll }}</span><i></i></a>
   </section>
 
   <!-- ============ LINEUP ============ -->
@@ -102,10 +102,10 @@
     <div class="container">
       <div class="section__head section__head--split">
         <div>
-          <p class="eyebrow" data-reveal>The lineup</p>
-          <h2 class="h1" data-split>Pick your fuel.</h2>
+          <p class="eyebrow" data-reveal>{{ home.lineup.eyebrow }}</p>
+          <h2 class="h1" data-split>{{ home.lineup.title }}</h2>
         </div>
-        <p class="lead measure" data-reveal>Three plates. Fuel for every session. Each one a full meal, tracked to the gram and frozen at peak.</p>
+        <p class="lead measure" data-reveal>{{ home.lineup.lead }}</p>
       </div>
       <div class="deck" data-lineup></div>
     </div>
@@ -115,14 +115,10 @@
   <section class="section" id="how">
     <div class="container">
       <div class="section__head">
-        <p class="eyebrow" data-reveal>How it works</p>
-        <h2 class="h2" data-split>Freezer to fork in ninety seconds.</h2>
+        <p class="eyebrow" data-reveal>{{ home.how.eyebrow }}</p>
+        <h2 class="h2" data-split>{{ home.how.title }}</h2>
       </div>
-      <div class="grid grid-3 steps">
-        <div class="step" data-reveal><h3 class="step__title">Keep it frozen</h3><p class="step__copy">Ships cold, lives in your freezer. Peak freshness, zero preservatives doing the work.</p></div>
-        <div class="step" data-reveal data-reveal-delay="0.08"><h3 class="step__title">Pan or microwave</h3><p class="step__copy">Pan-warm until soft for the real thing, or 10–15 seconds in the microwave between paper towels when you’re late for the gym.</p></div>
-        <div class="step" data-reveal data-reveal-delay="0.16"><h3 class="step__title">Track it</h3><p class="step__copy">Every meal is already in MyFitnessPal. Search “PRATUS”, log it, lift.</p></div>
-      </div>
+      <div class="grid grid-3 steps" data-steps></div>
     </div>
   </section>
 
@@ -132,45 +128,35 @@
       <img src="/img/founder-popup.webp" alt="" loading="lazy" width="1200" height="1800">
     </div>
     <div class="container story__content">
-      <p class="eyebrow" data-reveal>About Pratus</p>
-      <h2 class="story__quote" data-split>Built in a Gujarati kitchen. Tested in the gym.</h2>
-      <!-- DRAFT COPY — replace with Pratiti's own words -->
-      <div class="story__copy">
-        <p data-reveal><strong>Pratus started with a stubborn question:</strong> why did eating for performance mean giving up the food that made me who I am?</p>
-        <p data-reveal>Every high-protein option was a chicken breast, a shake, or a sad bowl of quinoa. Nothing on the shelf looked like the plates at my parents’ table — rotli and shaak, thepla in a foil pack, paneer paratha on a Sunday.</p>
-        <p data-reveal>So we rebuilt them. Same recipes, same hands, re-engineered for the macros athletes actually need. Vegetarian by default. Indian without apology. <strong>Culture that performs.</strong></p>
-      </div>
+      <p class="eyebrow" data-reveal>{{ home.story.eyebrow }}</p>
+      <h2 class="story__quote" data-split>{{ home.story.quote }}</h2>
+      <!-- Draft copy: edit src/content/home.json → story -->
+      <div class="story__copy" data-story></div>
       <div class="story__actions" data-reveal><a class="btn btn--light" href="#order">Taste the difference <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
     </div>
-    <p class="story__credit" data-reveal><small>Founder</small>Pratiti</p>
+    <p class="story__credit" data-reveal><small>{{ home.story.creditLabel }}</small>{{ home.story.creditName }}</p>
   </section>
 
   <!-- ============ WHY US ============ -->
   <section class="section compare" id="why">
     <div class="container">
       <div class="section__head section__head--center">
-        <p class="eyebrow eyebrow--center" data-reveal>Why us?</p>
-        <h2 class="h1" data-split>Us vs. them.</h2>
-        <p class="lead measure" data-reveal>Every option you had before made you choose. Protein or culture. Convenience or a real plate. We don’t.</p>
+        <p class="eyebrow eyebrow--center" data-reveal>{{ home.why.eyebrow }}</p>
+        <h2 class="h1" data-split>{{ home.why.title }}</h2>
+        <p class="lead measure" data-reveal>{{ home.why.lead }}</p>
       </div>
       <div class="compare__wrap" data-reveal>
         <table>
           <thead>
             <tr>
-              <th scope="col"><span class="sr-only">Feature</span></th>
-              <th scope="col">Homemade Indian food</th>
-              <th scope="col">Meal-prep services</th>
-              <th scope="col">Protein supplements</th>
+              <th scope="col"><span class="sr-only">{{ home.why.featureHeading }}</span></th>
+              <th scope="col">{{ home.why.columns.0 }}</th>
+              <th scope="col">{{ home.why.columns.1 }}</th>
+              <th scope="col">{{ home.why.columns.2 }}</th>
               <th scope="col" class="is-us"><span class="compare__logo">PRATUS</span><span class="compare__stripe" aria-hidden="true"><i></i><i></i><i></i></span></th>
             </tr>
           </thead>
-          <tbody>
-            <tr><th scope="row">More than 20g protein</th><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td><i class="mark mark--yes" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td class="is-us"><i class="mark mark--us pop-yellow" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td></tr>
-            <tr><th scope="row">A full meal</th><td><i class="mark mark--yes" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td><td><i class="mark mark--yes" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td class="is-us"><i class="mark mark--us pop-blue" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td></tr>
-            <tr><th scope="row">Culturally authentic</th><td><i class="mark mark--yes" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td class="is-us"><i class="mark mark--us pop-green" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td></tr>
-            <tr><th scope="row">Convenient</th><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td><i class="mark mark--yes" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td><td><i class="mark mark--yes" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td><td class="is-us"><i class="mark mark--us pop-yellow" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td></tr>
-            <tr><th scope="row">Made for vegetarians</th><td><i class="mark mark--yes" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td><i class="mark mark--no" aria-label="No">&mdash;</i></td><td class="is-us"><i class="mark mark--us pop-blue" aria-label="Yes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></td></tr>
-          </tbody>
+          <tbody data-compare></tbody>
         </table>
       </div>
     </div>
@@ -180,8 +166,8 @@
   <section class="section section--tight gallery" id="gallery" aria-label="Lifestyle">
     <div class="container section__head section__head--split">
       <div>
-        <p class="eyebrow" data-reveal>On the field</p>
-        <h2 class="h2" data-split>Train. Eat. Repeat.</h2>
+        <p class="eyebrow" data-reveal>{{ home.gallery.eyebrow }}</p>
+        <h2 class="h2" data-split>{{ home.gallery.title }}</h2>
       </div>
       <div class="gallery__nav" data-reveal>
         <button class="gallery__btn" data-gallery-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
@@ -189,21 +175,21 @@
       </div>
     </div>
     <div class="gallery__track">
-      <figure class="gallery__item"><img src="/img/life-bleachers.webp" alt="Pratus pouches lined up on stadium bleachers" loading="lazy"><figcaption>Game day</figcaption></figure>
-      <figure class="gallery__item"><img src="/img/life-net.webp" alt="Rotli pouch at the tennis net" loading="lazy"><figcaption>Court side</figcaption></figure>
-      <figure class="gallery__item"><img src="/img/life-turf.webp" alt="All three Pratus meals on turf" loading="lazy"><figcaption>Turf</figcaption></figure>
-      <figure class="gallery__item"><img src="/img/life-racket.webp" alt="Founder with racket and rotli pouch" loading="lazy"><figcaption>Match point</figcaption></figure>
-      <figure class="gallery__item"><img src="/img/life-track.webp" alt="Rotli on the track" loading="lazy"><figcaption>Lane 4</figcaption></figure>
-      <figure class="gallery__item"><img src="/img/life-blacktop.webp" alt="Pratus cooler on the blacktop" loading="lazy"><figcaption>Blacktop</figcaption></figure>
+      <figure class="gallery__item"><img src="/img/life-bleachers.webp" alt="{{ home.gallery.items.0.alt }}" loading="lazy"><figcaption>{{ home.gallery.items.0.caption }}</figcaption></figure>
+      <figure class="gallery__item"><img src="/img/life-net.webp" alt="{{ home.gallery.items.1.alt }}" loading="lazy"><figcaption>{{ home.gallery.items.1.caption }}</figcaption></figure>
+      <figure class="gallery__item"><img src="/img/life-turf.webp" alt="{{ home.gallery.items.2.alt }}" loading="lazy"><figcaption>{{ home.gallery.items.2.caption }}</figcaption></figure>
+      <figure class="gallery__item"><img src="/img/life-racket.webp" alt="{{ home.gallery.items.3.alt }}" loading="lazy"><figcaption>{{ home.gallery.items.3.caption }}</figcaption></figure>
+      <figure class="gallery__item"><img src="/img/life-track.webp" alt="{{ home.gallery.items.4.alt }}" loading="lazy"><figcaption>{{ home.gallery.items.4.caption }}</figcaption></figure>
+      <figure class="gallery__item"><img src="/img/life-blacktop.webp" alt="{{ home.gallery.items.5.alt }}" loading="lazy"><figcaption>{{ home.gallery.items.5.caption }}</figcaption></figure>
     </div>
   </section>
 
   <!-- ============ CTA ============ -->
   <section class="section section--tight cta" id="cta">
     <div class="cta__panel" data-reveal>
-      <p class="eyebrow eyebrow--center" style="color: rgba(240,235,237,.75)">Ready when you are</p>
-      <h2 class="cta__title">Fuel your next PR.</h2>
-      <a class="btn btn--light btn--lg" href="#order">Order now</a>
+      <p class="eyebrow eyebrow--center" style="color: rgba(240,235,237,.75)">{{ home.cta.eyebrow }}</p>
+      <h2 class="cta__title">{{ home.cta.title }}</h2>
+      <a class="btn btn--light btn--lg" href="#order">{{ home.cta.button }}</a>
     </div>
   </section>
 
@@ -212,19 +198,19 @@
     <div class="postit" aria-hidden="true">Sticky note: to be deleted later</div>
     <div class="container mission__grid">
       <div>
-        <p class="eyebrow" data-reveal>Our mission</p>
-        <h2 class="mission__statement balance" data-split>Pratus Kitchen is a vegetarian, high-protein Indian meal company.</h2>
+        <p class="eyebrow" data-reveal>{{ home.mission.eyebrow }}</p>
+        <h2 class="mission__statement balance" data-split>{{ home.mission.statement }}</h2>
         <p class="lead mission__copy measure" data-reveal>
-          The food you grew up on was never the problem. The macros were. We rebuilt the plates our mothers made — rotli, thepla, paneer paratha — so they hit your protein goal, and never a compromise on taste.
+          {{ home.mission.copy }}
         </p>
         <div class="stats">
-          <div class="stat" data-reveal><div class="stat__num" data-count="30">0<small>g</small></div><div class="stat__label">protein per meal, up to</div></div>
-          <div class="stat" data-reveal data-reveal-delay="0.08"><div class="stat__num" data-count="90">0<small>s</small></div><div class="stat__label">pan to plate</div></div>
-          <div class="stat" data-reveal data-reveal-delay="0.16"><div class="stat__num" data-count="100">0<small>%</small></div><div class="stat__label">vegetarian, always</div></div>
+          <div class="stat" data-reveal><div class="stat__num" data-count="{{ home.mission.stats.0.value }}">0<small>{{ home.mission.stats.0.unit }}</small></div><div class="stat__label">{{ home.mission.stats.0.label }}</div></div>
+          <div class="stat" data-reveal data-reveal-delay="0.08"><div class="stat__num" data-count="{{ home.mission.stats.1.value }}">0<small>{{ home.mission.stats.1.unit }}</small></div><div class="stat__label">{{ home.mission.stats.1.label }}</div></div>
+          <div class="stat" data-reveal data-reveal-delay="0.16"><div class="stat__num" data-count="{{ home.mission.stats.2.value }}">0<small>{{ home.mission.stats.2.unit }}</small></div><div class="stat__label">{{ home.mission.stats.2.label }}</div></div>
         </div>
       </div>
       <div class="mission__media" data-reveal>
-        <img src="/img/food-spread.webp" alt="Rotli, thepla and paneer paratha with chana, paneer, tomatoes and coriander" width="1536" height="1024" loading="lazy">
+        <img src="/img/food-spread.webp" alt="{{ home.mission.imageAlt }}" width="1536" height="1024" loading="lazy">
       </div>
     </div>
   </section>
@@ -236,37 +222,37 @@
     <div class="footer__grid">
       <div>
         <div class="footer__wordmark">PRATUS</div>
-        <p class="footer__tag">Vegetarian, high-protein Indian meals. Culture that performs.</p>
+        <p class="footer__tag">{{ site.footer.tagline }}</p>
       </div>
       <div>
-        <h4>Shop</h4>
+        <h4>{{ site.footer.shopHeading }}</h4>
         <ul>
-          <li><a href="/product.html?p=paneer-paratha">Push Day Paneer Paratha</a></li>
-          <li><a href="/product.html?p=rotli">Pr-otein Rotli</a></li>
-          <li><a href="/product.html?p=thepla">Thunder Thigh Thepla</a></li>
+          <li><a href="/product.html?p=paneer-paratha">{{ products.products.0.day }} {{ products.products.0.name }}</a></li>
+          <li><a href="/product.html?p=rotli">{{ products.products.1.day }} {{ products.products.1.name }}</a></li>
+          <li><a href="/product.html?p=thepla">{{ products.products.2.day }} {{ products.products.2.name }}</a></li>
         </ul>
       </div>
       <div>
-        <h4>Company</h4>
+        <h4>{{ site.footer.companyHeading }}</h4>
         <ul>
-          <li><a href="#story">Our story</a></li>
-          <li><a href="#why">Why us</a></li>
-          <li><a href="#how">How it works</a></li>
-          <li><a href="mailto:hello@pratuskitchen.com">Contact</a></li>
+          <li><a href="#story">{{ site.footer.companyLinks.story }}</a></li>
+          <li><a href="#why">{{ site.footer.companyLinks.why }}</a></li>
+          <li><a href="#how">{{ site.footer.companyLinks.how }}</a></li>
+          <li><a href="mailto:{{ site.footer.contactEmail }}">{{ site.footer.companyLinks.contact }}</a></li>
         </ul>
       </div>
       <div>
-        <h4>Join the culture</h4>
+        <h4>{{ site.footer.joinHeading }}</h4>
         <form class="footer__form">
           <label class="sr-only" for="email">Email</label>
-          <input class="footer__input" id="email" type="email" placeholder="you@email.com" required>
-          <button class="btn btn--primary" type="submit">Join</button>
+          <input class="footer__input" id="email" type="email" placeholder="{{ site.footer.emailPlaceholder }}" required>
+          <button class="btn btn--primary" type="submit">{{ site.footer.joinButton }}</button>
         </form>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>© 2026 Pratus Kitchen. All rights reserved.</span>
-      <span>Keep frozen · Made for vegetarians</span>
+      <span>{{ site.footer.legal }}</span>
+      <span>{{ site.footer.note }}</span>
     </div>
   </div>
 </footer>

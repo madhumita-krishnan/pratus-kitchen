@@ -1,6 +1,7 @@
 // Nav behaviour shared by every page: burger menu, section highlight, cart badge, account menu.
 import { gsap, reduced } from './motion.js';
 import { cart, syncBadges } from './cart.js';
+import site from '../content/site.json';
 
 export function initNav() {
   const nav = document.querySelector('.nav');
@@ -71,7 +72,7 @@ export function initNav() {
       const a = e.target.closest('a[href="#"]');
       if (!a) return;
       e.preventDefault();
-      toast(signedIn ? 'Account pages arrive with the shop launch.' : 'Sign-in arrives with the shop launch.');
+      toast(signedIn ? site.account.toastSignedIn : site.account.toastSignedOut);
       close();
     });
   }

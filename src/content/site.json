@@ -1,0 +1,38 @@
+{
+  "_readme": "Copy shared by every page: navigation, account menu, footer. Edit the text on the right of each colon. Do not rename the keys on the left.",
+  "nav": {
+    "order": "Order",
+    "story": "Our Story",
+    "why": "Why Us?"
+  },
+  "account": {
+    "eyebrow": "Your account",
+    "signedOut": "Sign in to reorder in one tap.",
+    "signIn": "Sign in",
+    "trackOrder": "Track an order",
+    "subscription": "Subscription",
+    "soon": "Soon",
+    "toastSignedOut": "Sign-in arrives with the shop launch.",
+    "toastSignedIn": "Account pages arrive with the shop launch."
+  },
+  "footer": {
+    "tagline": "Vegetarian, high-protein Indian meals. Culture that performs.",
+    "shopHeading": "Shop",
+    "companyHeading": "Company",
+    "companyLinks": {
+      "story": "Our story",
+      "why": "Why us",
+      "how": "How it works",
+      "contact": "Contact"
+    },
+    "contactEmail": "hello@pratuskitchen.com",
+    "joinHeading": "Join the culture",
+    "emailPlaceholder": "you@email.com",
+    "joinButton": "Join",
+    "joinToast": "You’re on the list. Welcome to the culture.",
+    "joinError": "That didn’t go through. Try again in a moment.",
+    "legal": "© 2026 Pratus Kitchen. All rights reserved.",
+    "note": "Keep frozen · Made for vegetarians",
+    "shortNote": "© 2026 Pratus Kitchen · Keep frozen"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "_readme": "Everything written on the home page, top to bottom. Headlines are set in the display font and always appear in capitals, so write them in normal sentence case here.",
+  "meta": {
+    "title": "PRATUS — Culture That Performs",
+    "description": "Pratus Kitchen makes vegetarian, high-protein Indian meals. Real food, macro-tracked, ready in 90 seconds."
+  },
+  "hero": {
+    "tagline": "Culture that performs",
+    "scroll": "Scroll"
+  },
+  "lineup": {
+    "eyebrow": "The lineup",
+    "title": "Pick your fuel.",
+    "lead": "Three plates. Fuel for every session. Each one a full meal, tracked to the gram and frozen at peak.",
+    "vegetarianChip": "Vegetarian",
+    "priceSuffix": "1 meal",
+    "button": "Shop now"
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "Freezer to fork in ninety seconds.",
+    "steps": [
+      { "title": "Keep it frozen", "copy": "Ships cold, lives in your freezer. Peak freshness, zero preservatives doing the work." },
+      { "title": "Pan or microwave", "copy": "Pan-warm until soft for the real thing, or 10–15 seconds in the microwave between paper towels when you’re late for the gym." },
+      { "title": "Track it", "copy": "Every meal is already in MyFitnessPal. Search “PRATUS”, log it, lift." }
+    ]
+  },
+  "story": {
+    "_note": "DRAFT — replace with Pratiti’s own words. <strong>…</strong> makes a phrase bold (white on the dark panel).",
+    "eyebrow": "About Pratus",
+    "quote": "Built in a Gujarati kitchen. Tested in the gym.",
+    "paragraphs": [
+      "<strong>Pratus started with a stubborn question:</strong> why did eating for performance mean giving up the food that made me who I am?",
+      "Every high-protein option was a chicken breast, a shake, or a sad bowl of quinoa. Nothing on the shelf looked like the plates at my parents’ table — rotli and shaak, thepla in a foil pack, paneer paratha on a Sunday.",
+      "So we rebuilt them. Same recipes, same hands, re-engineered for the macros athletes actually need. Vegetarian by default. Indian without apology. <strong>Culture that performs.</strong>"
+    ],
+    "creditLabel": "Founder",
+    "creditName": "Pratiti"
+  },
+  "why": {
+    "eyebrow": "Why us?",
+    "title": "Us vs. them.",
+    "lead": "Every option you had before made you choose. Protein or culture. Convenience or a real plate. We don’t.",
+    "featureHeading": "Feature",
+    "columns": ["Homemade Indian food", "Meal-prep services", "Protein supplements"],
+    "_rows": "One row per feature. `them` is yes/no for each of the three columns above, in order. Pratus is always a yes.",
+    "rows": [
+      { "feature": "More than 20g protein", "them": [false, true, false] },
+      { "feature": "A full meal", "them": [true, true, false] },
+      { "feature": "Culturally authentic", "them": [true, false, false] },
+      { "feature": "Convenient", "them": [false, true, true] },
+      { "feature": "Made for vegetarians", "them": [true, false, false] }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "On the field",
+    "title": "Train. Eat. Repeat.",
+    "_items": "Captions and alt text for the six lifestyle photos, in the order they appear. Alt text describes the photo for screen readers and search engines.",
+    "items": [
+      { "caption": "Game day", "alt": "Pratus pouches lined up on stadium bleachers" },
+      { "caption": "Court side", "alt": "Rotli pouch at the tennis net" },
+      { "caption": "Turf", "alt": "All three Pratus meals on turf" },
+      { "caption": "Match point", "alt": "Founder with racket and rotli pouch" },
+      { "caption": "Lane 4", "alt": "Rotli on the track" },
+      { "caption": "Blacktop", "alt": "Pratus cooler on the blacktop" }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Ready when you are",
+    "title": "Fuel your next PR.",
+    "button": "Order now"
+  },
+  "mission": {
+    "_note": "This section is parked (dashed outline, sticky note) and slated for deletion.",
+    "eyebrow": "Our mission",
+    "statement": "Pratus Kitchen is a vegetarian, high-protein Indian meal company.",
+    "copy": "The food you grew up on was never the problem. The macros were. We rebuilt the plates our mothers made — rotli, thepla, paneer paratha — so they hit your protein goal, and never a compromise on taste.",
+    "stats": [
+      { "value": 30, "unit": "g", "label": "protein per meal, up to" },
+      { "value": 90, "unit": "s", "label": "pan to plate" },
+      { "value": 100, "unit": "%", "label": "vegetarian, always" }
+    ],
+    "imageAlt": "Rotli, thepla and paneer paratha with chana, paneer, tomatoes and coriander"
+  }
+}

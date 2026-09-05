@@ -1,5 +1,6 @@
 import { gsap, reduced, animate, glueLastWords } from './motion.js';
-import { PRODUCTS, HEATING, bySlug, money } from './products.js';
+import { PRODUCTS, bySlug, money } from './products.js';
+import copy from '../content/product.json';
 import { initNav, toast } from './nav.js';
 import { cart, syncBadges } from './cart.js';
 
@@ -7,7 +8,7 @@ initNav();
 
 const slug = new URLSearchParams(location.search).get('p') || location.hash.slice(1) || PRODUCTS[0].slug; // hash form is used by the shareable single-file build
 const p = bySlug(slug) || PRODUCTS[0];
-document.title = `${p.day} ${p.name} — PRATUS`;
+document.title = `${p.day} ${p.name} — ${copy.titleSuffix}`;
 
 const $ = (s) => document.querySelector(s);
 const hero = $('.pdp-hero');
@@ -22,10 +23,10 @@ $('[data-description]').textContent = p.description;
 
 // Macros count up from 0 when they scroll in (same [data-count] as the home-page stats)
 $('[data-macros]').innerHTML = [
-  [p.macros.cal, '', 'calories'], [p.macros.protein, 'g', 'protein'], [p.macros.carbs, 'g', 'carbs'], [p.macros.fat, 'g', 'fat'],
+  [p.macros.cal, '', copy.macros.labels.cal], [p.macros.protein, 'g', copy.macros.labels.protein], [p.macros.carbs, 'g', copy.macros.labels.carbs], [p.macros.fat, 'g', copy.macros.labels.fat],
 ].map(([n, unit, l], i) => `<div class="macro" data-reveal data-reveal-delay="${i * 0.08}"><div class="macro__num" data-count="${n}">0${unit ? `<small>${unit}</small>` : ''}</div><div class="macro__label">${l}</div></div>`).join('');
 
-$('[data-heating]').innerHTML = HEATING.map((h) => `<div class="heat__item" data-reveal><b>${h.label}</b><span>${h.text}</span></div>`).join('');
+$('[data-heating]').innerHTML = copy.heating.steps.map((h) => `<div class="heat__item" data-reveal><b>${h.label}</b><span>${h.text}</span></div>`).join('');
 
 $('[data-others]').innerHTML = PRODUCTS.filter((o) => o.slug !== p.slug).map((o) => `
   <a class="card card--${o.key}" href="/product.html?p=${o.slug}" data-reveal>
@@ -33,7 +34,7 @@ $('[data-others]').innerHTML = PRODUCTS.filter((o) => o.slug !== p.slug).map((o)
     <div class="card__body">
       <p class="card__day">${o.day}</p>
       <h3 class="card__name">${o.name}</h3>
-      <div class="card__cta"><span class="card__price">${money(o.price)}</span><span class="btn btn--sm ${o.key === 'paneer' ? '' : 'btn--light'}">View</span></div>
+      <div class="card__cta"><span class="card__price">${money(o.price)}</span><span class="btn btn--sm ${o.key === 'paneer' ? '' : 'btn--light'}">${copy.others.button}</span></div>
     </div>
   </a>`).join('');
 
@@ -45,7 +46,7 @@ $('[data-qty="1"]').addEventListener('click', () => { qty += 1; out.value = qty;
 $('[data-add]').addEventListener('click', () => {
   cart.add(p.slug, qty);
   syncBadges(true);
-  toast(`${qty} × ${p.day} ${p.shortName} added. <a href="/checkout.html">Checkout</a>`, true);
+  toast(`${qty} × ${p.day} ${p.shortName} ${copy.addedToast} <a href="/checkout.html">${copy.checkoutLink}</a>`, true);
 });
 
 // intro — everything eases in
