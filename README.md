@@ -9,6 +9,7 @@ npm run images -- cards   # just the three lineup card photos (pouch-centred fra
 node scripts/qa-shots.mjs qa   # headless-Chrome screenshots of every section (desktop, mobile, PDP)
 node scripts/build-share.mjs index --product=<url>    # single-file review copy → share/index.html
 node scripts/build-share.mjs product --home=<url>     # single-file review copy → share/product.html
+node scripts/build-site-artifact.mjs                  # whole site, relative paths → dist-share/site (one multi-file review link)
 ```
 
 The `share/` files are what gets published as review links (Claude Artifacts); every asset is inlined so one file is the whole page.
