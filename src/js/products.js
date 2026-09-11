@@ -1,15 +1,19 @@
 // Product catalogue. The words, macros and prices live in src/content/products.json (Bansari edits
 // those); this file only attaches the image assets and gradient that belong to the front end.
-// Gallery photos keep their own 3:2 / 2:3 ratio (w/h are the real pixel sizes for layout before load).
 import content from '../content/products.json';
 
-// Per-product assets, keyed by slug. Adding a product = an entry here + an entry in products.json.
+// Per-product assets, keyed by slug. Paths are written out in full (not built at runtime) so the
+// share build can find and inline them. Adding a product = an entry here + one in products.json.
+// Gallery shots: l = landscape 1600×1067, p = portrait 1067×1600, in page order.
+const L = [1600, 1067], P = [1067, 1600];
 const ASSETS = {
-  'paneer-paratha': { key: 'paneer', gradient: 'var(--g-paneer)', galleryShape: ['l', 'l', 'l', 'p', 'l', 'l'] },
-  rotli:            { key: 'rotli',  gradient: 'var(--g-rotli)',  galleryShape: ['l', 'p', 'l', 'l', 'p', 'l'] },
-  thepla:           { key: 'thepla', gradient: 'var(--g-thepla)', galleryShape: ['p', 'l', 'l', 'l', 'p', 'l'] },
+  'paneer-paratha': { key: 'paneer', card: '/img/paneer-card.webp', hero: '/img/paneer-hero.webp',
+    gallery: [['/img/paneer-g1.webp', L], ['/img/paneer-g2.webp', L], ['/img/paneer-g3.webp', L], ['/img/paneer-g4.webp', P], ['/img/paneer-g5.webp', L], ['/img/paneer-g6.webp', L]] },
+  rotli: { key: 'rotli', card: '/img/rotli-card.webp', hero: '/img/rotli-hero.webp',
+    gallery: [['/img/rotli-g1.webp', L], ['/img/rotli-g2.webp', P], ['/img/rotli-g3.webp', L], ['/img/rotli-g4.webp', L], ['/img/rotli-g5.webp', P], ['/img/rotli-g6.webp', L]] },
+  thepla: { key: 'thepla', card: '/img/thepla-card.webp', hero: '/img/thepla-hero.webp',
+    gallery: [['/img/thepla-g1.webp', P], ['/img/thepla-g2.webp', L], ['/img/thepla-g3.webp', L], ['/img/thepla-g4.webp', L], ['/img/thepla-g5.webp', P], ['/img/thepla-g6.webp', L]] },
 };
-const SIZE = { l: [1600, 1067], p: [1067, 1600] };
 
 export const PRODUCTS = content.products.map((p) => {
   const a = ASSETS[p.slug];
@@ -17,13 +21,9 @@ export const PRODUCTS = content.products.map((p) => {
   return {
     ...p,
     key: a.key,
-    gradient: a.gradient,
-    card: `/img/${a.key}-card.webp`,
-    hero: `/img/${a.key}-hero.webp`,
-    gallery: (p.gallery || []).map((g, i) => {
-      const [w, h] = SIZE[a.galleryShape[i] || 'l'];
-      return { ...g, src: `/img/${a.key}-g${i + 1}.webp`, w, h };
-    }),
+    card: a.card,
+    hero: a.hero,
+    gallery: a.gallery.map(([src, [w, h]], i) => ({ ...(p.gallery?.[i] || { cap: '', alt: '' }), src, w, h })),
   };
 });
 
