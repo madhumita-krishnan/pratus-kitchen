@@ -50,17 +50,19 @@
 </header>
 
 <main>
-  <section class="pdp-hero">
-    <img class="pdp-hero__img" src="" alt="">
-    <div class="container pdp-hero__grid">
-      <div>
-        <p class="eyebrow" style="color: inherit; opacity: .8" data-day></p>
-        <h1 class="pdp-hero__name" data-name></h1>
-        <p class="pdp-hero__tagline" data-tagline></p>
+  <!-- ============ PRODUCT: photos left, buy panel right (sticky) ============ -->
+  <section class="pdp">
+    <div class="container pdp__grid">
+      <div class="pdp__media">
+        <figure class="pdp__main"><img data-pdp-main src="" alt="" width="1600" height="1067" fetchpriority="high"></figure>
+        <div class="pdp__thumbs" role="tablist" aria-label="Product photos" data-pdp-thumbs></div>
       </div>
-      <div class="pdp-hero__buy">
-        <div class="pdp-hero__price" data-price>$0<small>{{ product.priceLabel }}</small></div>
-        <div class="pdp-hero__row">
+      <div class="pdp__buy">
+        <p class="eyebrow" data-day></p>
+        <h1 class="pdp__name" data-name></h1>
+        <p class="pdp__tagline" data-tagline></p>
+        <div class="pdp__price" data-price>$0<small>{{ product.priceLabel }}</small></div>
+        <div class="pdp__row">
           <div class="qty" role="group" aria-label="Quantity">
             <button type="button" data-qty="-1" aria-label="Decrease">−</button>
             <output aria-live="polite">1</output>
@@ -68,31 +70,24 @@
           </div>
           <button class="btn btn--primary" type="button" data-add>{{ product.addToCart }}</button>
         </div>
-        <p style="font-size: var(--text-micro); color: var(--fg-muted); font-weight:600">{{ product.shippingNote }}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--tight">
-    <div class="container">
-      <p class="eyebrow" data-reveal>{{ product.macros.eyebrow }}</p>
-      <div class="macros" style="margin-top: var(--s-6)" data-macros></div>
-    </div>
-  </section>
-
-  <section class="section section--tight">
-    <div class="container pdp-info">
-      <div>
-        <p class="eyebrow" data-reveal>{{ product.info.eyebrow }}</p>
-        <h2 class="h2" style="margin-top: var(--s-4)" data-reveal>{{ product.info.title }}</h2>
-        <div class="pdp-info__copy" style="margin-top: var(--s-5)">
-          <p data-reveal data-description></p>
-          <p data-reveal>{{ product.info.second }}</p>
+        <p class="pdp__note">{{ product.shippingNote }}</p>
+        <p class="eyebrow">{{ product.macros.eyebrow }}</p>
+        <div class="macros" data-macros></div>
+        <p class="pdp__desc" data-description></p>
+        <div class="pdp__details">
+          <details open>
+            <summary>{{ product.accordions.details }}</summary>
+            <p>{{ product.info.second }}</p>
+          </details>
+          <details>
+            <summary>{{ product.accordions.heating }}</summary>
+            <div class="heat" data-heating></div>
+          </details>
+          <details>
+            <summary>{{ product.accordions.delivery }}</summary>
+            <p>{{ product.shippingNote }}</p>
+          </details>
         </div>
-      </div>
-      <div>
-        <p class="eyebrow" data-reveal>{{ product.heating.eyebrow }}</p>
-        <div class="heat" style="margin-top: var(--s-5)" data-heating></div>
       </div>
     </div>
   </section>

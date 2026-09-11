@@ -5,7 +5,7 @@
   "addToCart": "Add to cart",
   "addedToast": "added.",
   "checkoutLink": "Checkout",
-  "shippingNote": "Ships frozen · Free shipping over $60",
+  "shippingNote": "Delivered frozen · Free delivery over $60",
   "macros": {
     "eyebrow": "Macros per meal",
     "labels": { "cal": "calories", "protein": "protein", "carbs": "carbs", "fat": "fat" }
@@ -15,6 +15,7 @@
     "title": "Real food. Real macros.",
     "second": "Made in small batches, frozen at peak, and already logged in MyFitnessPal so the only thing you have to track is your lift."
   },
+  "accordions": { "details": "Details", "heating": "Heating", "delivery": "Delivery" },
   "heating": {
     "eyebrow": "Heating instructions",
     "steps": [

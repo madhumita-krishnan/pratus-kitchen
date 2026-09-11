@@ -11,10 +11,22 @@ const p = bySlug(slug) || PRODUCTS[0];
 document.title = `${p.day} ${p.name} — ${copy.titleSuffix}`;
 
 const $ = (s) => document.querySelector(s);
-const hero = $('.pdp-hero');
-hero.classList.add(`pdp-hero--${p.key}`);
-$('.pdp-hero__img').src = p.hero;
-$('.pdp-hero__img').alt = `${p.day} ${p.name}`;
+document.querySelector('.pdp').classList.add(`pdp--${p.key}`);
+
+// Photos: the pack shot first, then every gallery shot; a thumbnail swaps the main image
+const photos = [{ src: p.hero, alt: `${p.day} ${p.name}` }, ...(p.gallery || [])];
+const main = $('[data-pdp-main]');
+const thumbs = $('[data-pdp-thumbs]');
+thumbs.innerHTML = photos.map((g, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-thumb="${i}"><img src="${g.src}" alt="" loading="${i < 4 ? 'eager' : 'lazy'}"></button>`).join('');
+const showPhoto = (i) => {
+  const g = photos[i];
+  const swap = () => { main.src = g.src; main.alt = g.alt; };
+  thumbs.querySelectorAll('[data-thumb]').forEach((b) => b.setAttribute('aria-selected', String(Number(b.dataset.thumb) === i)));
+  if (reduced) { swap(); return; }
+  gsap.to(main, { opacity: 0, duration: 0.15, ease: 'power2.in', onComplete: () => { swap(); gsap.fromTo(main, { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }); } });
+};
+main.src = photos[0].src; main.alt = photos[0].alt;
+thumbs.addEventListener('click', (e) => { const b = e.target.closest('[data-thumb]'); if (b) showPhoto(Number(b.dataset.thumb)); });
 $('[data-day]').textContent = p.day;
 $('[data-name]').textContent = p.name;
 $('[data-tagline]').textContent = p.tagline;
@@ -50,10 +62,11 @@ $('[data-add]').addEventListener('click', () => {
 });
 
 // intro — everything eases in
-gsap.from('.nav .pill', { opacity: 0, y: -10, duration: 0.8, ease: 'power3.out', stagger: 0.08, clearProps: 'all' });
-gsap.from('.pdp-hero__name', { yPercent: 30, opacity: 0, duration: 1, ease: 'power4.out', delay: 0.1 });
-gsap.from('.pdp-hero__img', { scale: 1.08, duration: 1.6, ease: 'power3.out' });
-gsap.from(['.pdp-hero__tagline', '.pdp-hero__buy'], { y: 24, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1, delay: 0.3 });
+if (!reduced) {
+  gsap.from('.nav .pill', { opacity: 0, y: -10, duration: 0.8, ease: 'power3.out', stagger: 0.08, clearProps: 'all' });
+  gsap.from('.pdp__main', { opacity: 0, scale: 0.98, duration: 1.2, ease: 'power3.out' });
+  gsap.from('.pdp__buy > *', { y: 20, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.05, delay: 0.15, clearProps: 'all' });
+}
 // reveals, counters, no-orphan glue
 animate();
 

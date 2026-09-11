@@ -83,8 +83,7 @@
 <main>
   <!-- ============ HERO ============ -->
   <section class="hero" aria-label="Pratus">
-    <img class="hero__fallback" src="/img/hero-1200.webp" alt="" hidden>
-    <canvas class="hero__canvas" aria-hidden="true"></canvas>
+    <img class="hero__photo" src="/img/hero-1200.webp" srcset="/img/hero-1200.webp 1200w, /img/hero-2400.webp 2400w" sizes="100vw" alt="" fetchpriority="high">
     <div class="hero__vignette" aria-hidden="true"></div>
 
     <div class="hero__content">
@@ -153,7 +152,7 @@
               <th scope="col">{{ home.why.columns.0 }}</th>
               <th scope="col">{{ home.why.columns.1 }}</th>
               <th scope="col">{{ home.why.columns.2 }}</th>
-              <th scope="col" class="is-us"><span class="compare__logo">PRATUS</span><span class="compare__stripe" aria-hidden="true"><i></i><i></i><i></i></span></th>
+              <th scope="col" class="is-us"><span class="compare__logo">PRATUS</span></th>
             </tr>
           </thead>
           <tbody data-compare></tbody>
@@ -184,35 +183,19 @@
     </div>
   </section>
 
-  <!-- ============ CTA ============ -->
-  <section class="section section--tight cta" id="cta">
-    <div class="cta__panel" data-reveal>
-      <p class="eyebrow eyebrow--center" style="color: rgba(240,235,237,.75)">{{ home.cta.eyebrow }}</p>
-      <h2 class="cta__title">{{ home.cta.title }}</h2>
-      <a class="btn btn--light btn--lg" href="#order">{{ home.cta.button }}</a>
-    </div>
-  </section>
-
-  <!-- ============ MISSION ============ -->
-  <section class="section mission section--parked" id="mission">
-    <div class="postit" aria-hidden="true">Sticky note: to be deleted later</div>
-    <div class="container mission__grid">
-      <div>
-        <p class="eyebrow" data-reveal>{{ home.mission.eyebrow }}</p>
-        <h2 class="mission__statement balance" data-split>{{ home.mission.statement }}</h2>
-        <p class="lead mission__copy measure" data-reveal>
-          {{ home.mission.copy }}
-        </p>
-        <div class="stats">
-          <div class="stat" data-reveal><div class="stat__num" data-count="{{ home.mission.stats.0.value }}">0<small>{{ home.mission.stats.0.unit }}</small></div><div class="stat__label">{{ home.mission.stats.0.label }}</div></div>
-          <div class="stat" data-reveal data-reveal-delay="0.08"><div class="stat__num" data-count="{{ home.mission.stats.1.value }}">0<small>{{ home.mission.stats.1.unit }}</small></div><div class="stat__label">{{ home.mission.stats.1.label }}</div></div>
-          <div class="stat" data-reveal data-reveal-delay="0.16"><div class="stat__num" data-count="{{ home.mission.stats.2.value }}">0<small>{{ home.mission.stats.2.unit }}</small></div><div class="stat__label">{{ home.mission.stats.2.label }}</div></div>
-        </div>
+  <!-- ============ CTA: full-bleed red banner with the macro summary ============ -->
+  <section class="cta" id="cta">
+    <div class="container cta__inner">
+      <p class="eyebrow eyebrow--center cta__eyebrow" data-reveal>{{ home.cta.eyebrow }}</p>
+      <h2 class="cta__title" data-split>{{ home.cta.title }}</h2>
+      <div class="cta__stats">
+        <div class="cta__stat" data-reveal><div class="cta__num" data-count="{{ home.cta.stats.0.value }}">0<small>{{ home.cta.stats.0.unit }}</small></div><div class="cta__label">{{ home.cta.stats.0.label }}</div></div>
+        <div class="cta__stat" data-reveal data-reveal-delay="0.08"><div class="cta__num" data-count="{{ home.cta.stats.1.value }}">0<small>{{ home.cta.stats.1.unit }}</small></div><div class="cta__label">{{ home.cta.stats.1.label }}</div></div>
+        <div class="cta__stat" data-reveal data-reveal-delay="0.16"><div class="cta__num" data-count="{{ home.cta.stats.2.value }}">0<small>{{ home.cta.stats.2.unit }}</small></div><div class="cta__label">{{ home.cta.stats.2.label }}</div></div>
       </div>
-      <div class="mission__media" data-reveal>
-        <img src="/img/food-spread.webp" alt="{{ home.mission.imageAlt }}" width="1536" height="1024" loading="lazy">
-      </div>
+      <a class="btn btn--light btn--lg" href="#order" data-reveal>{{ home.cta.button }}</a>
     </div>
+    <span class="cta__mark" aria-hidden="true">PRATUS</span>
   </section>
 </main>
 

@@ -13,8 +13,6 @@ node scripts/build-share.mjs product --home=<url>     # single-file review copy 
 
 The `share/` files are what gets published as review links (Claude Artifacts); every asset is inlined so one file is the whole page.
 
-Debug hooks on the home page: `window.__pratus.ripple(x, y, strength)` (x, y in 0–1) and `window.__pratus.slam()`.
-
 ## Who edits what
 
 | Area | Where | Owner |

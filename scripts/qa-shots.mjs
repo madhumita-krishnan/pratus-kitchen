@@ -37,8 +37,8 @@ async function shoot(path, { w, h, name, sections = [], seedCart = false }) {
   await page.close();
 }
 
-await shoot('/', { w: 1440, h: 900, name: 'desktop', sections: ['mission', 'order', 'gallery', 'why', 'how', 'story', 'cta'] });
-await shoot('/', { w: 390, h: 844, name: 'mobile', sections: ['mission', 'order', 'why', 'story'] });
+await shoot('/', { w: 1440, h: 900, name: 'desktop', sections: ['order', 'gallery', 'why', 'how', 'story', 'cta'] });
+await shoot('/', { w: 390, h: 844, name: 'mobile', sections: ['order', 'why', 'story'] });
 await shoot('/product.html?p=thepla', { w: 1440, h: 900, name: 'pdp', sections: [] });
 await shoot('/checkout.html', { w: 1440, h: 900, name: 'checkout', sections: [], seedCart: true });
 await shoot('/checkout.html', { w: 390, h: 844, name: 'checkout-mobile', sections: [], seedCart: true });

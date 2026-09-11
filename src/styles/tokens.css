@@ -88,7 +88,7 @@
   --container:    1440px;
   --gutter:       clamp(20px, 4vw, 56px);   /* page edge */
   --gap:          clamp(16px, 2vw, 32px);   /* between grid items */
-  --section-y:    clamp(88px, 11vw, 176px); /* vertical rhythm between sections */
+  --section-y:    clamp(56px, 6vw, 96px);   /* vertical rhythm between sections */
   --nav-h:        72px;
 
   /* ---- Radii ---- */

@@ -1,5 +1,4 @@
 import { gsap, reduced, animate } from './motion.js';
-import { initHero } from './hero.js';
 import { PRODUCTS, money } from './products.js';
 import { initNav, toast } from './nav.js';
 import { api, apiEnabled } from './api.js';
@@ -10,12 +9,30 @@ import site from '../content/site.json';
 initNav();
 
 /* ---- Loader → hero intro --------------------------------------------- */
-// A thepla gets eaten bite by bite while the hero texture and fonts load,
-// then everything eases in. Nothing on the page simply appears.
+// A thepla gets eaten bite by bite while the hero photo and fonts load, then
+// everything eases in: the photo settles from a slight zoom, the letters drop
+// in, the tagline and scroll cue follow. Calm, no slam, no ripple.
 const hero = document.querySelector('.hero');
 const loader = document.querySelector('.loader');
 const pills = document.querySelectorAll('.nav .pill');
-const heroApi = hero ? initHero(hero) : { ready: Promise.resolve(), play() {} };
+const heroPhoto = hero?.querySelector('.hero__photo');
+const heroBits = hero ? [hero.querySelectorAll('.hero__wordmark span'), hero.querySelector('.hero__tag'), hero.querySelector('.hero__scroll')] : [];
+if (hero) gsap.set(heroBits, { opacity: 0 });
+const heroApi = {
+  ready: heroPhoto ? heroPhoto.decode().catch(() => {}) : Promise.resolve(),
+  play() {
+    if (!hero) return;
+    const [letters, tag, cue] = heroBits;
+    if (reduced) { gsap.set(heroBits, { opacity: 1 }); return; }
+    gsap.timeline()
+      .from(heroPhoto, { scale: 1.08, duration: 2.4, ease: 'power3.out' }, 0)
+      .fromTo(letters, { yPercent: -60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.05 }, 0.1)
+      .fromTo(tag, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+      .fromTo(cue, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.5');
+    // content lifts and fades as the hero scrolls out
+    gsap.to(hero.querySelector('.hero__content'), { yPercent: -18, opacity: 0.25, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+  },
+};
 
 gsap.set(pills, { opacity: 0, y: -10 });
 let eating;
@@ -52,15 +69,12 @@ if (lineup) {
         <span class="chip">${p.macros.cal} cal</span>
       </div>
       <div class="card__body">
-        <p class="card__day">${p.day}</p>
-        <h3 class="card__name">${p.name}</h3>
-        <div class="card__macros">
-          <span class="chip">${p.macros.carbs}g carbs</span>
-          <span class="chip">${p.macros.fat}g fat</span>
-          <span class="chip">${home.lineup.vegetarianChip}</span>
+        <div>
+          <p class="card__day">${p.day}</p>
+          <h3 class="card__name">${p.name}</h3>
         </div>
         <div class="card__cta">
-          <span class="card__price">${money(p.price)} · ${home.lineup.priceSuffix}</span>
+          <span class="card__price">${money(p.price)}</span>
           <a class="btn btn--sm ${p.key === 'paneer' ? '' : 'btn--light'}" href="/product.html?p=${p.slug}">${home.lineup.button}
             <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </a>
@@ -84,18 +98,17 @@ if (story) story.innerHTML = home.story.paragraphs.map((p) => `<p data-reveal>${
 const compare = document.querySelector('[data-compare]');
 if (compare) {
   const CHECK = (w) => `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>`;
-  const POPS = ['pop-yellow', 'pop-blue', 'pop-green'];
-  compare.innerHTML = home.why.rows.map((row, i) => `
+  compare.innerHTML = home.why.rows.map((row) => `
     <tr><th scope="row">${row.feature}</th>${row.them.map((yes) => (yes
       ? `<td><i class="mark mark--yes" aria-label="Yes">${CHECK(1.75)}</i></td>`
-      : '<td><i class="mark mark--no" aria-label="No">&mdash;</i></td>')).join('')}<td class="is-us"><i class="mark mark--us ${POPS[i % 3]}" aria-label="Yes">${CHECK(2.75)}</i></td></tr>`).join('');
+      : '<td><i class="mark mark--no" aria-label="No">&mdash;</i></td>')).join('')}<td class="is-us"><i class="mark mark--us" aria-label="Yes">${CHECK(2.75)}</i></td></tr>`).join('');
 }
 
 /* ---- Gallery arrows -------------------------------------------------- */
 const track = document.querySelector('.gallery__track');
 document.querySelectorAll('[data-gallery-dir]').forEach((b) =>
   b.addEventListener('click', () => {
-    const w = track.firstElementChild.getBoundingClientRect().width + 24;
+    const w = track.firstElementChild.getBoundingClientRect().width + 12;
     track.scrollBy({ left: Number(b.dataset.galleryDir) * w, behavior: 'smooth' });
   }));
 

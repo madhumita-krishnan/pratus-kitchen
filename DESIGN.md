@@ -1,6 +1,8 @@
 # PRATUS — Design System
 
 > Culture that performs. Clean, premium, athletic. Think Nike's confidence with an Indian kitchen's warmth.
+>
+> **Revised 2026-09-11 from client notes:** flat colour instead of gradients (cards, CTA, PDP); eyebrows lose the red dash; section rhythm tightened (`--section-y` 56–96px, head gap 24 / head→content 32, matching the story section); the hero is a static photo with a calm intro (no WebGL ripple, no slam); lineup cards are the full pack shot with the two macro chips in the top corners and a flat CTA bar; the CTA is a full-bleed red banner carrying the three brand numbers; the product page is a standard two-column PDP; “ships” is “delivered” everywhere.
 > Every value here is a CSS custom property in [`src/styles/tokens.css`](src/styles/tokens.css). Components consume tokens; they never hard-code values. Shared behaviours (reveals, counters, no-orphan glue) live in [`src/js/motion.js`](src/js/motion.js).
 
 **Contents** — 1 Principles · 2 Colour · 3 Typography · 4 Hierarchy · 5 Spacing & gutters · 6 Layout & alignment (knolling) · 7 Radii · 8 Surfaces & elevation · 9 Icons · 10 Photography · 11 Components & states · 12 Motion · 13 Interaction · 14 Accessibility · 15 Voice · 16 Files & checklist
@@ -97,7 +99,7 @@ Big numbers: stat tiles `clamp(2.5rem, 4vw, 3.75rem)`, macro tiles `clamp(2.5rem
 | `--track-button` | `0.08em` | Buttons (`0.06em` nav links, `0.04em` chips/toast, `0.02em` prices/tagline) |
 
 ### Eyebrow
-Micro / 700 / `0.18em` / uppercase / muted, with a 24×2px red dash before it (`.eyebrow`). Centred eyebrows (`.eyebrow--center`) drop the dash. An eyebrow always sits directly above a heading, gap `--s-4`.
+Micro / 700 / `0.18em` / uppercase / muted (`.eyebrow`). No dash, no ornament. An eyebrow always sits directly above a heading, gap `--s-4`.
 
 ### Text rules
 - **No orphans.** `h1–h4 { text-wrap: balance }`, `p, li, figcaption { text-wrap: pretty }` in CSS, and `motion.js → noOrphans()` glues the last two words of every heading, paragraph, list item and caption with a no-break space. Split headlines keep their last two words in a `white-space: nowrap` group. Opt out with `data-noglue` (only for single-word or two-word strings that must wrap).

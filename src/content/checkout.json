@@ -27,7 +27,7 @@
     "phoneHint": "for the courier",
     "speedLabel": "Delivery speed",
     "free": "Free",
-    "note": "Ships Monday to Wednesday so it never sits in a depot over the weekend. Keep frozen on arrival."
+    "note": "Delivered Monday to Wednesday so it never sits in a depot over the weekend. Keep frozen on arrival."
   },
   "payment": {
     "title": "Payment",
@@ -52,15 +52,15 @@
     "meals": "meals",
     "remove": "Remove",
     "quantityOf": "Quantity of",
-    "awayFromFree": "away from free standard shipping",
-    "freeUnlocked": "<b>Free standard shipping</b> unlocked",
+    "awayFromFree": "away from free standard delivery",
+    "freeUnlocked": "<b>Free standard delivery</b> unlocked",
     "promoPlaceholder": "Promo code",
     "promoButton": "Apply",
     "promoEmpty": "Enter a code first.",
     "promoNotLive": "isn’t live yet.",
     "promoInvalid": "isn’t a valid code.",
     "subtotal": "Subtotal",
-    "shipping": "Shipping",
+    "shipping": "Delivery",
     "total": "Total"
   },
   "empty": {
@@ -73,7 +73,7 @@
     "eyebrowPrefix": "Order",
     "title": "Order in. Go lift.",
     "leadBefore": "A confirmation is on its way to",
-    "leadMiddle": ". Your meals ship cold and land in",
+    "leadMiddle": ". Your meals are delivered cold in",
     "leadAfter": ".",
     "button": "Back to the lineup"
   }
