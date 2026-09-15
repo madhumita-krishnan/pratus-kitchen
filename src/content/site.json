@@ -12,8 +12,11 @@
     "trackOrder": "Track an order",
     "subscription": "Subscription",
     "soon": "Soon",
-    "toastSignedOut": "Sign-in arrives with the shop launch.",
-    "toastSignedIn": "Account pages arrive with the shop launch."
+    "hello": "Hey",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "details": "Details",
+    "signOut": "Sign out"
   },
   "footer": {
     "tagline": "Vegetarian, high-protein Indian meals. Culture that performs.",

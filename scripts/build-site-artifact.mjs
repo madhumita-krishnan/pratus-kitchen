@@ -1,4 +1,4 @@
-// Builds the whole site (home, product, checkout) with relative paths into dist-share/site,
+// Builds the whole site (home, product, checkout, account) with relative paths into dist-share/site,
 // for publishing as ONE multi-file review link. Root-relative paths ("/img/x.webp", "/product.html")
 // become relative ("img/x.webp", "product.html") so the pages work under any base URL.
 import { execSync } from 'node:child_process';
@@ -15,7 +15,7 @@ for (const f of files) {
   const before = readFileSync(f, 'utf8');
   const after = before
     .replace(/(["'(])\/(img|fonts|brand|assets)\//g, '$1$2/')
-    .replace(/(["'])\/(product|checkout)\.html/g, '$1$2.html')
+    .replace(/(["'])\/(product|checkout|account)\.html/g, '$1$2.html')
     .replace(/href="\/#/g, 'href="index.html#')
     .replace(/href="\/"/g, 'href="index.html"');
   if (after !== before) { writeFileSync(f, after); n++; }

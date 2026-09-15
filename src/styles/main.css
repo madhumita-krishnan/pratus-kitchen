@@ -228,7 +228,10 @@ p, li, figcaption, dd { text-wrap: pretty; }
 @media (max-width: 767px) {
   .nav { grid-template-columns: auto 1fr auto; }
   .nav__links {
-    position: fixed; inset: var(--nav-h) var(--gutter) auto var(--gutter);
+    /* A compact dropdown right under the burger: anchored to the nav itself (so it follows the bar
+       wherever it is) and pinned to the right gutter. `justify-self` is reset — on a positioned grid
+       child it centres the box, which is how the menu once floated mid-screen. */
+    position: absolute; top: 100%; right: var(--gutter); left: auto; width: max-content; min-width: 200px; justify-self: auto;
     height: auto; flex-direction: column; align-items: stretch; padding: var(--s-2);
     border-radius: var(--r-lg);
     opacity: 0; transform: translateY(-8px) scale(0.98); pointer-events: none;
@@ -330,6 +333,7 @@ p, li, figcaption, dd { text-wrap: pretty; }
 .card__link { position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
 .card__link:focus-visible { outline-offset: -4px; }
 .card__cta .btn { position: relative; z-index: 3; }
+@media (max-width: 767px) { .card__body { flex-wrap: wrap; row-gap: var(--s-3); } .card__cta { flex: 1 0 100%; justify-content: flex-end; } }
 
 /* ==========================================================================
    Lifestyle gallery (horizontal scroll)
@@ -418,6 +422,22 @@ p, li, figcaption, dd { text-wrap: pretty; }
   100% { transform: rotate(var(--tilt)) scale(1); }
 }
 .reduced-motion .compare tbody tr:hover .mark--us { animation: none; }
+@media (max-width: 767px) { /* the whole table on one phone screen — the PRATUS column is the point, never off-screen */
+  .compare table { min-width: 0; }
+  .compare th:first-child { width: 30%; }
+  .compare th.is-us { width: 17%; }
+  .compare tbody th, .compare tbody td:first-child { text-wrap: normal; }
+  .compare th, .compare td { padding: 12px 4px; }
+  .compare th:first-child, .compare td:first-child { padding-left: var(--s-4); font-size: var(--text-micro); }
+  .compare thead th { font-size: 0.5rem; letter-spacing: 0; line-height: 1.3; padding-inline: 2px; }
+  .compare__logo { font-size: 1rem; letter-spacing: 0.03em; }
+  .compare thead .is-us { border-radius: 0 var(--r-lg) 0 0; }
+  .compare tbody tr:last-child .is-us { border-radius: 0 0 var(--r-lg) 0; }
+  .mark { width: 24px; height: 24px; }
+  .mark svg { width: 14px; height: 14px; }
+  .mark--us { width: 28px; height: 28px; border-radius: 8px; }
+  .mark--us svg { width: 14px; height: 14px; }
+}
 
 /* ==========================================================================
    How it works
@@ -438,6 +458,7 @@ p, li, figcaption, dd { text-wrap: pretty; }
 .step__icons img { height: 2.25rem; width: auto; }  /* the cap height of the number beside it */
 .step__title { font-family: var(--font-display); font-size: var(--text-h3); text-transform: uppercase; line-height: 0.95; }
 .step__copy { color: var(--fg-muted); }
+@media (max-width: 767px) { .step__head { margin-bottom: var(--s-3); } }
 
 /* ==========================================================================
    Story (About Pratus) — full-bleed founder photo on ink, copy left-aligned
@@ -824,6 +845,41 @@ p, li, figcaption, dd { text-wrap: pretty; }
   .line { grid-template-columns: 56px 1fr auto; }
   .line__thumb { width: 56px; }
 }
+
+/* ==========================================================================
+   Account page — sign-in panel, then the profile (orders, subscription, addresses, details)
+   built from the checkout's blocks, fields and summary panel
+   ========================================================================== */
+.acct { padding: calc(var(--nav-h) + var(--s-8)) 0 var(--section-y); }
+.acct [hidden] { display: none; }
+.acct__signin { display: flex; gap: var(--s-2); width: 100%; max-width: 440px; }
+.acct__signin .input { flex: 1; min-width: 0; }
+.acct__head { display: flex; align-items: center; gap: var(--s-5); flex-wrap: wrap; margin-bottom: var(--s-7); }
+.acct__head > div { flex: 1; min-width: 240px; }
+.acct__avatar { width: 72px; height: 72px; border-radius: var(--r-pill); display: grid; place-items: center; background: var(--g-thepla); color: var(--c-white); font-family: var(--font-display); font-size: 1.75rem; letter-spacing: 0.04em; }
+.acct__meta { margin-top: var(--s-2); font-size: var(--text-small); font-weight: 600; color: var(--fg-muted); }
+.account__btn.is-active { background: rgba(11,10,10,0.08); }
+.orders { display: grid; }
+.order { display: grid; gap: var(--s-4); padding-block: var(--s-5); border-top: 1px solid var(--line); }
+.order:first-child { padding-top: 0; border-top: 0; }
+.order__head { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+.order__no { font-family: var(--font-display); font-size: 1.375rem; line-height: 1; text-transform: uppercase; letter-spacing: var(--track-display); }
+.order__date { font-size: var(--text-small); font-weight: 600; color: var(--fg-muted); }
+.order__total { margin-left: auto; font-weight: 800; font-variant-numeric: tabular-nums; }
+.order__actions { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.chip--go { background: rgba(98,164,95,0.14); border-color: rgba(98,164,95,0.3); color: var(--c-green-deep); }
+.addr { display: grid; gap: var(--s-3); }
+.addr__head { display: flex; align-items: center; gap: var(--s-3); }
+.addr__head .btn { margin-left: auto; }
+.addr__lines { font-weight: 600; line-height: 1.5; }
+.fields__actions { grid-column: 1 / -1; display: flex; gap: var(--s-2); }
+.fuel { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.fuel__num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; }
+.fuel__num small { font-size: 1.25rem; }
+.fuel__label { margin-top: var(--s-1); font-size: var(--text-micro); font-weight: 700; letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--fg-muted); }
+.fav { display: flex; align-items: center; gap: var(--s-3); padding-top: var(--s-4); border-top: 1px solid var(--line); }
+.fav__body { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.fav .line__day { white-space: nowrap; }
 
 /* ==========================================================================
    Product gallery (PDP) — an editorial showcase. Slides run full-bleed at

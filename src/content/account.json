@@ -1,0 +1,72 @@
+{
+  "_readme": "Everything written on the account page: the sign-in panel and the signed-in profile (orders, subscription, addresses, details, the fuel tally). Field labels shared with checkout come from checkout.json. `demo` is SAMPLE data shown to reviewers until the backend supplies real accounts and orders.",
+  "meta": { "title": "Your account — PRATUS" },
+  "signin": {
+    "eyebrow": "Your account",
+    "title": "Sign in to reorder in one tap.",
+    "lead": "No password to remember. We email you a link, you tap it, you’re in.",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "button": "Send my link",
+    "testChip": "Test mode · nothing is sent",
+    "sent": "Link sent. In this preview you’re signed in straight away."
+  },
+  "head": {
+    "eyebrow": "Your account",
+    "hello": "Hey",
+    "since": "Fuelling since",
+    "signOut": "Sign out"
+  },
+  "orders": {
+    "title": "Orders",
+    "empty": "No orders yet. Your first plate is one tap away.",
+    "reorder": "Reorder",
+    "track": "Track",
+    "delivered": "Delivered",
+    "shipped": "On its way",
+    "packing": "Packing",
+    "reordered": "Back in your bag.",
+    "viewBag": "View bag",
+    "tracking": "Courier tracking arrives with the shop launch."
+  },
+  "subscription": {
+    "title": "Subscription",
+    "soon": "Soon",
+    "lead": "A weekly drop you pick once, delivered cold every Monday. Skip or pause any week, no fees.",
+    "button": "Tell me when it’s live",
+    "toast": "You’re first in line when subscriptions open."
+  },
+  "addresses": {
+    "title": "Addresses",
+    "default": "Default",
+    "edit": "Edit",
+    "save": "Save address",
+    "cancel": "Cancel",
+    "saved": "Address saved."
+  },
+  "details": {
+    "title": "Details",
+    "email": "Email",
+    "phone": "Phone",
+    "phoneHint": "for the courier",
+    "save": "Save changes",
+    "saved": "Details saved."
+  },
+  "fuel": {
+    "eyebrow": "Your fuel",
+    "meals": "Meals delivered",
+    "protein": "Protein delivered",
+    "favourite": "Your go-to",
+    "reorder": "Reorder"
+  },
+  "demo": {
+    "_note": "SAMPLE account for the preview. Real accounts come from the backend (docs/API-CONTRACT.md).",
+    "since": "2026",
+    "address": { "first": "Pratiti", "last": "Shah", "addr": "214 Market Street", "addr2": "Apt 4B", "city": "San Francisco", "state": "CA", "zip": "94105", "phone": "(415) 555-0142" },
+    "orders": [
+      { "no": "PK-2087", "date": "12 Sep 2026", "status": "shipped", "method": "standard", "lines": [{ "slug": "thepla", "qty": 2 }, { "slug": "rotli", "qty": 1 }] },
+      { "no": "PK-2041", "date": "29 Aug 2026", "status": "delivered", "method": "express", "lines": [{ "slug": "paneer-paratha", "qty": 3 }] },
+      { "no": "PK-1993", "date": "15 Aug 2026", "status": "delivered", "method": "standard", "lines": [{ "slug": "thepla", "qty": 2 }, { "slug": "paneer-paratha", "qty": 2 }, { "slug": "rotli", "qty": 2 }] }
+    ]
+  }
+}

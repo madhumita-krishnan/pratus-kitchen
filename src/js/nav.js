@@ -73,27 +73,33 @@ export function initNav() {
   if (cartLink && location.pathname.endsWith('/checkout.html')) cartLink.classList.add('is-active');
 
   /* ---- Account menu ---------------------------------------------------
-     A glass popover under the account icon. Signed-out by default; `?demo=account`
-     shows the signed-in treatment (initials avatar) so the client can see both. */
+     A glass popover under the account icon. Signed-out until someone signs in on
+     account.html (`?demo=account` signs in the sample account for reviewers). */
   const account = nav.querySelector('.account');
   if (account) {
     const btn = account.querySelector('.account__btn');
     const menu = account.querySelector('.account__menu');
-    const signedIn = new URLSearchParams(location.search).get('demo') === 'account';
-    if (signedIn) {
-      account.classList.add('is-signed-in');
-      btn.innerHTML = '<span class="account__avatar" aria-hidden="true">PK</span>';
-      btn.setAttribute('aria-label', 'Account: Pratiti');
-      menu.innerHTML = `
-        <p class="eyebrow">Your account</p>
-        <p class="account__hello">Hey Pratiti.</p>
+    if (location.pathname.endsWith('/account.html')) btn.classList.add('is-active');
+    const signedOut = { btn: btn.innerHTML, menu: menu.innerHTML };
+    const paint = () => {
+      const u = user.get();
+      account.classList.toggle('is-signed-in', !!u);
+      btn.setAttribute('aria-label', u ? `Account: ${u.name}` : 'Account');
+      btn.innerHTML = u ? `<span class="account__avatar" aria-hidden="true">${initials(u.name)}</span>` : signedOut.btn;
+      menu.innerHTML = u ? `
+        <p class="eyebrow">${site.account.eyebrow}</p>
+        <p class="account__hello">${site.account.hello} ${u.name.split(' ')[0]}.</p>
         <ul class="account__list">
-          <li><a href="#"><span>Orders</span><span class="account__count">2</span></a></li>
-          <li><a href="#"><span>Subscription</span><span class="chip">Soon</span></a></li>
-          <li><a href="#"><span>Addresses</span></a></li>
-          <li><a href="#"><span>Sign out</span></a></li>
-        </ul>`;
-    }
+          <li><a href="/account.html#orders"><span>${site.account.orders}</span><span class="account__count">${u.orders}</span></a></li>
+          <li><a href="/account.html#subscription"><span>${site.account.subscription}</span><span class="chip">${site.account.soon}</span></a></li>
+          <li><a href="/account.html#addresses"><span>${site.account.addresses}</span></a></li>
+          <li><a href="/account.html#details"><span>${site.account.details}</span></a></li>
+          <li><a href="/account.html" data-signout><span>${site.account.signOut}</span></a></li>
+        </ul>` : signedOut.menu;
+      menu.querySelector('[data-signout]')?.addEventListener('click', () => user.clear());
+    };
+    paint();
+    addEventListener('user:change', paint);
     const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); account.classList.remove('is-open'); };
     const open = () => {
       menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); account.classList.add('is-open');
@@ -102,18 +108,25 @@ export function initNav() {
     btn.addEventListener('click', () => (menu.hidden ? open() : close()));
     document.addEventListener('click', (e) => { if (!account.contains(e.target)) close(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { close(); btn.focus(); } });
-    // Nothing behind the menu is wired yet: say so instead of dead links
-    menu.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href="#"]');
-      if (!a) return;
-      e.preventDefault();
-      toast(signedIn ? site.account.toastSignedIn : site.account.toastSignedOut);
-      close();
-    });
   }
 
   return { cart };
 }
+
+/* ---- Who is signed in ----------------------------------------------------
+   Front-end only until the backend issues sessions: the profile lives in localStorage.
+   `?demo=account` signs in the sample account so reviewers can see the signed-in site. */
+const USER_KEY = 'pratus-user';
+const DEMO = { name: 'Pratiti Shah', email: 'pratiti@pratuskitchen.com', orders: 3 };
+export const user = {
+  get() {
+    try { const u = JSON.parse(localStorage.getItem(USER_KEY)); if (u?.email) return u; } catch { /* no storage */ }
+    return new URLSearchParams(location.search).get('demo') === 'account' ? DEMO : null;
+  },
+  set(u) { try { localStorage.setItem(USER_KEY, JSON.stringify(u)); } catch { /* no storage */ } dispatchEvent(new Event('user:change')); return u; },
+  clear() { try { localStorage.removeItem(USER_KEY); } catch { /* no storage */ } dispatchEvent(new Event('user:change')); },
+};
+export const initials = (name = '') => name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || 'PK';
 
 export function toast(msg, html = false) {
   let t = document.querySelector('.toast');

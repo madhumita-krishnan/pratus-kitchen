@@ -46,8 +46,10 @@ $('[data-others]').innerHTML = PRODUCTS.filter((o) => o.slug !== p.slug).map((o)
   <a class="card card--${o.key}" href="/product.html?p=${o.slug}" data-reveal>
     <div class="card__media"><img src="${o.card}" alt="" loading="lazy"></div>
     <div class="card__body">
-      <p class="card__day">${o.day}</p>
-      <h3 class="card__name">${o.name}</h3>
+      <div>
+        <p class="card__day">${o.day}</p>
+        <h3 class="card__name">${o.name}</h3>
+      </div>
       <div class="card__cta"><span class="card__price">${money(o.price)}</span><span class="btn btn--sm btn--light">${copy.others.button}</span></div>
     </div>
   </a>`).join('');

@@ -10,6 +10,7 @@ const inputs = {
   main: resolve(import.meta.dirname, 'index.html'),
   product: resolve(import.meta.dirname, 'product.html'),
   checkout: resolve(import.meta.dirname, 'checkout.html'),
+  account: resolve(import.meta.dirname, 'account.html'),
 };
 
 export default defineConfig(({ mode }) => {

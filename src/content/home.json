@@ -54,7 +54,7 @@
     "columns": [
       "Homemade Indian food",
       "Meal-prep services",
-      "Protein supplements"
+      "Protein supple\u00adments"
     ],
     "_rows": "One row per feature. `them` is yes/no for each of the three columns above, in order. Pratus is always a yes.",
     "rows": [
