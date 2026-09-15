@@ -1,5 +1,5 @@
 import { gsap, reduced, animate } from './motion.js';
-import { PRODUCTS, money } from './products.js';
+import { PRODUCTS, money, asset } from './products.js';
 import { initNav, toast } from './nav.js';
 import { api, apiEnabled } from './api.js';
 import home from '../content/home.json';
@@ -75,9 +75,7 @@ if (lineup) {
         </div>
         <div class="card__cta">
           <span class="card__price">${money(p.price)}</span>
-          <a class="btn btn--sm ${p.key === 'paneer' ? '' : 'btn--light'}" href="/product.html?p=${p.slug}">${home.lineup.button}
-            <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
+          <a class="btn btn--sm btn--light" href="/product.html?p=${p.slug}">${home.lineup.button}</a>
         </div>
       </div>
       <a class="card__link" href="/product.html?p=${p.slug}" aria-label="View ${p.day} ${p.name}"></a>
@@ -90,8 +88,12 @@ if (lineup) {
    from the content file here instead of being repeated in the HTML. */
 const steps = document.querySelector('[data-steps]');
 if (steps) {
+  // Katie's icons, one row per step (step 2 shows both ways to heat)
+  const ICONS = [['/img/how-freeze.webp'], ['/img/how-pan.webp', '/img/how-microwave.webp'], ['/img/how-track.webp']];
   steps.innerHTML = home.how.steps.map((st, i) => `
-    <div class="step" data-reveal${i ? ` data-reveal-delay="${(i * 0.08).toFixed(2)}"` : ''}><h3 class="step__title">${st.title}</h3><p class="step__copy">${st.copy}</p></div>`).join('');
+    <div class="step" data-reveal${i ? ` data-reveal-delay="${(i * 0.08).toFixed(2)}"` : ''}>
+      <div class="step__head"><span class="step__num">0${i + 1}</span><span class="step__icons">${(ICONS[i] || []).map((src) => `<img src="${asset(src)}" alt="" loading="lazy" height="400">`).join('')}</span></div>
+      <h3 class="step__title">${st.title}</h3><p class="step__copy">${st.copy}</p></div>`).join('');
 }
 const story = document.querySelector('[data-story]');
 if (story) story.innerHTML = home.story.paragraphs.map((p) => `<p data-reveal>${p}</p>`).join('');

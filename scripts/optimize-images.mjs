@@ -11,7 +11,9 @@ const OUT = path.resolve('public/img');
 
 // [output name, source path, max width(s)]
 const IMAGES = [
-  ['hero',            'Website Photos/Pratiti and products/DSC_0560.JPG', [2400, 1200]],  // the exact shot behind Main hero.png
+  // The exact shot behind Main hero.png, cut to that mockup's frame: 16:9, the top 69% of the photo's
+  // height, centred on the founder at 42% of its width. Plain object-fit: cover then never leaves a gap.
+  ['hero',            'Website Photos/Pratiti and products/DSC_0560.JPG', [2400, 1200], { x0: 0.0112, x1: 0.8288, y0: 0, y1: 0.69 }],
   ['hero-alt',        'Website Photos/Pratiti and products/DSC_0543.JPG', [2400]],
   ['paneer-hero',     'Website Photos/Pratiti and products/DSC_0593.JPG', [2400]],
   ['rotli-hero',      'Website Photos/Rotli/Best/DSC_0371.JPG', [2400]],
@@ -24,6 +26,7 @@ const IMAGES = [
   ['life-track',      'Website Photos/Rotli/Rotli on Track/DSC_0010.JPG', [1600]],
   ['founder',         'Website Photos/Pratiti and products/DSC_0569.JPG', [1600]],
   ['founder-popup',   'Pratus/Images/Picture of founder.png', [1200]],
+  ['founder-story',   'Website Photos/Pratiti and products/founder-mirror.jpg', [1200]],  // IMG_1896: the About section portrait
   ['thepla-closeup',  'IMG_2727_website.webp', [1200]],
 ];
 
@@ -82,14 +85,25 @@ for (const [name, rel, box, opts] of CARDS) {
 }
 if (process.argv[2] === 'cards') process.exit(0);
 
-for (const [name, rel, widths] of IMAGES) {
+for (const [name, rel, widths, crop] of IMAGES) {
   for (const w of widths) {
     const suffix = widths.length > 1 ? `-${w}` : '';
     const out = path.join(OUT, `${name}${suffix}.webp`);
-    await sharp(path.join(SRC, rel)).rotate().resize({ width: w, withoutEnlargement: true })
-      .webp({ quality: 80 }).toFile(out);
+    let img = sharp(path.join(SRC, rel)).rotate();
+    if (crop) { // fractions of the oriented source
+      const { width: W, height: H } = await img.metadata();
+      const [W2, H2] = [W, H]; // rotate() may swap these for EXIF-rotated shots; none of the cropped ones are
+      img = img.extract({ left: Math.round(crop.x0 * W2), top: Math.round(crop.y0 * H2), width: Math.round((crop.x1 - crop.x0) * W2), height: Math.round((crop.y1 - crop.y0) * H2) });
+    }
+    await img.resize({ width: w, withoutEnlargement: true }).webp({ quality: 80 }).toFile(out);
     console.log('✓', path.basename(out));
   }
+}
+// How-it-works icons (Katie's PNGs in ../icons for how to instructions): whitespace trimmed, 400px tall, alpha kept
+const HOW = [['how-freeze', 'Freeze-1.png'], ['how-pan', 'Pan.png'], ['how-microwave', 'Microwave-1.png'], ['how-track', 'Track-2.png']];
+for (const [name, file] of HOW) {
+  await sharp(path.join(SRC, 'icons for how to instructions', file)).trim().resize({ height: 400 }).webp({ quality: 90 }).toFile(path.join(OUT, `${name}.webp`));
+  console.log('✓', `${name}.webp`);
 }
 // Loader: the real thepla (IMG_2727), square-cropped on the disc (centre 49%/50%, radius 47% of width)
 {

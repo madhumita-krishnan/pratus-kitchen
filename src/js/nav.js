@@ -7,6 +7,33 @@ export function initNav() {
   const nav = document.querySelector('.nav');
   if (!nav) return;
 
+  /* ---- Every page opens at the top (unless it was asked for an anchor) -------------------
+     The review link's host injects a runtime that stores the last scroll position under ONE
+     sessionStorage key for the whole artifact and restores it on whichever page loads next,
+     retrying on `load` — so a product page opened from a scrolled home page landed mid-page.
+     Zero the key before it re-reads it, scroll up now and again after its retry, and turn off
+     the browser's own restoration so reload and back behave the same everywhere. */
+  if (!location.hash) {
+    history.scrollRestoration = 'manual';
+    try { sessionStorage.setItem('__frame_scroll', '{"y":0}'); } catch { /* storage blocked: the scrollTo below still runs */ }
+    scrollTo(0, 0);
+    addEventListener('load', () => scrollTo(0, 0), { once: true });
+  }
+
+  /* ---- Anchors on another page ("Our story" from a product page) ---------------------------
+     Remember the target on click and scroll to it once the home page has rendered: the
+     review link's host drops the hash on the way, and the JS-rendered sections above the
+     target would move it after the browser's own jump anyway. */
+  const GOTO = 'pratus-goto';
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href*="#"]');
+    if (a?.hash && a.pathname !== location.pathname) try { sessionStorage.setItem(GOTO, a.hash.slice(1)); } catch { /* the hash still does the job where it survives */ }
+  });
+  let goto = null;
+  try { goto = sessionStorage.getItem(GOTO); sessionStorage.removeItem(GOTO); } catch { /* no storage */ }
+  const target = document.getElementById(goto || location.hash.slice(1));
+  if (target) addEventListener('load', () => target.scrollIntoView({ block: 'start', behavior: 'instant' }), { once: true });
+
   /* ---- Burger (phones) ---- */
   const burger = nav.querySelector('.nav__burger');
   burger?.addEventListener('click', () => {
@@ -14,6 +41,14 @@ export function initNav() {
     burger.setAttribute('aria-expanded', String(open));
   });
   nav.querySelectorAll('.nav__links a').forEach((a) => a.addEventListener('click', () => nav.classList.remove('is-open')));
+
+  /* ---- Hide on scroll down, return on scroll up (never while the phone menu is open) ---- */
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    if (Math.abs(y - lastY) > 8 && !nav.classList.contains('is-open')) nav.classList.toggle('is-hidden', y > lastY && y > 120);
+    lastY = y;
+  }, { passive: true });
 
   /* ---- Highlight the section in view (home only) ---- */
   const sectionLinks = [...nav.querySelectorAll('.nav__links a[href^="#"]')];

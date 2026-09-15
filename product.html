@@ -80,6 +80,10 @@
             <p>{{ product.info.second }}</p>
           </details>
           <details>
+            <summary>{{ product.accordions.ingredients }}</summary>
+            <p data-ingredients></p>
+          </details>
+          <details>
             <summary>{{ product.accordions.heating }}</summary>
             <div class="heat" data-heating></div>
           </details>
@@ -124,7 +128,47 @@
     </div>
   </section>
 
-  <section class="section">
+  <!-- ============ REVIEWS: summary (score + histogram) beside a write-a-review card, then the cards (knolled: subgrid rows) ============ -->
+  <section class="section reviews" aria-labelledby="reviews-title">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="h2" id="reviews-title" data-split>{{ product.reviews.title }}</h2>
+      </div>
+      <div class="reviews__summary">
+        <div class="reviews__score" data-reveal>
+          <p class="reviews__avg"><b data-rev-avg>0</b><small>{{ product.reviews.outOf }}</small></p>
+          <span data-rev-stars></span>
+          <p class="reviews__count" data-rev-count></p>
+          <ol class="reviews__bars" data-rev-bars aria-label="Ratings breakdown"></ol>
+        </div>
+        <div class="reviews__write" data-reveal>
+          <h3>{{ product.reviews.writeTitle }}</h3>
+          <p>{{ product.reviews.writeLead }}</p>
+          <details class="revform">
+            <summary class="btn btn--ghost"><span>{{ product.reviews.writeButton }}</span></summary>
+            <form data-review-form>
+              <div class="field"><label for="rv-name">{{ product.reviews.fields.name }}</label><input class="input" id="rv-name" name="name" required maxlength="60" autocomplete="name"></div>
+              <div class="field"><span class="field__label" id="rv-rating">{{ product.reviews.fields.rating }}</span>
+                <div class="rate" role="radiogroup" aria-labelledby="rv-rating">
+                  <input type="radio" name="stars" value="5" id="rv-5" required><label for="rv-5" aria-label="5 {{ product.reviews.starLabel }}s"></label>
+                  <input type="radio" name="stars" value="4" id="rv-4"><label for="rv-4" aria-label="4 {{ product.reviews.starLabel }}s"></label>
+                  <input type="radio" name="stars" value="3" id="rv-3"><label for="rv-3" aria-label="3 {{ product.reviews.starLabel }}s"></label>
+                  <input type="radio" name="stars" value="2" id="rv-2"><label for="rv-2" aria-label="2 {{ product.reviews.starLabel }}s"></label>
+                  <input type="radio" name="stars" value="1" id="rv-1"><label for="rv-1" aria-label="1 {{ product.reviews.starLabel }}"></label>
+                </div>
+              </div>
+              <div class="field field--full"><label for="rv-title">{{ product.reviews.fields.title }}</label><input class="input" id="rv-title" name="title" required maxlength="80"></div>
+              <div class="field field--full"><label for="rv-body">{{ product.reviews.fields.body }}</label><textarea class="input" id="rv-body" name="quote" required maxlength="600" rows="4"></textarea></div>
+              <div class="field--full"><button class="btn btn--primary" type="submit">{{ product.reviews.submit }}</button></div>
+            </form>
+          </details>
+        </div>
+      </div>
+      <div class="grid grid-3 reviews__grid" data-reviews></div>
+    </div>
+  </section>
+
+  <section class="section others">
     <div class="container">
       <div class="section__head">
         <p class="eyebrow" data-reveal>{{ product.others.eyebrow }}</p>

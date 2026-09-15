@@ -95,6 +95,26 @@ that simply doesn't exist.
 Response `200`: `{ "subscribed": true }`. `source` is `footer` today; `checkout` once the
 order flow passes `newsletter: true` through (that flag is already in the order request).
 
+### `GET /v1/products/:slug/reviews`
+Approved reviews, newest first. Until this exists the page shows the sample reviews in
+`products.json`.
+
+```json
+{ "reviews": [ { "id": "r_1", "name": "Aarav M.", "stars": 5, "title": "…", "quote": "…", "createdAt": "2026-09-15T12:00:00Z" } ] }
+```
+
+### `POST /v1/products/:slug/reviews`
+A visitor's review. `stars` is 1–5; `name` ≤ 60, `title` ≤ 80, `quote` ≤ 600 characters.
+
+```json
+{ "name": "Aarav M.", "stars": 5, "title": "…", "quote": "…" }
+```
+
+Response `201`: `{ "id": "r_9", "status": "pending" }`. A review is `pending` until someone
+approves it in the admin — only approved reviews come back from the GET above. (With the API
+off, the page keeps the visitor's review in their own browser and `?demo=account` shows the
+approve/remove buttons so the flow can be reviewed.)
+
 ## Not in the contract yet
 
 Sign-in and account pages: the nav has an account icon whose menu says these arrive with the

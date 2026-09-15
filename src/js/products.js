@@ -15,15 +15,22 @@ const ASSETS = {
     gallery: [['/img/thepla-g1.webp', P], ['/img/thepla-g2.webp', L], ['/img/thepla-g3.webp', L], ['/img/thepla-g4.webp', L], ['/img/thepla-g5.webp', P], ['/img/thepla-g6.webp', L]] },
 };
 
+// JS-inserted <img>s resolve their paths against where this bundle was really served from
+// (import.meta.url), not the page. Hosts that rewrite the HTML's paths (the artifact review link)
+// leave JS-built markup alone, so a plain 'img/x.webp' 404s there. Built bundles sit in assets/,
+// one level below the images; in dev this module is under src/js/, so use the site root instead.
+const FILES = import.meta.env.DEV ? new URL('/', location.href) : new URL('../', import.meta.url);
+export const asset = (p) => new URL(p.replace(/^\//, ''), FILES).href;
+
 export const PRODUCTS = content.products.map((p) => {
   const a = ASSETS[p.slug];
   if (!a) throw new Error(`products.json has "${p.slug}" but products.js has no assets for it`);
   return {
     ...p,
     key: a.key,
-    card: a.card,
-    hero: a.hero,
-    gallery: a.gallery.map(([src, [w, h]], i) => ({ ...(p.gallery?.[i] || { cap: '', alt: '' }), src, w, h })),
+    card: asset(a.card),
+    hero: asset(a.hero),
+    gallery: a.gallery.map(([src, [w, h]], i) => ({ ...(p.gallery?.[i] || { cap: '', alt: '' }), src: asset(src), w, h })),
   };
 });
 

@@ -32,4 +32,8 @@ export const api = {
   validatePromo: (code, subtotal) => request('POST', '/promos/validate', { code, subtotal }),
   /** POST /v1/newsletter → { subscribed: true } */
   subscribe: (email, source) => request('POST', '/newsletter', { email, source }),
+  /** GET /v1/products/:slug/reviews → { reviews: [{ id, name, stars, title, quote, createdAt }] } — approved reviews only. */
+  reviews: (slug) => request('GET', `/products/${slug}/reviews`),
+  /** POST /v1/products/:slug/reviews → { id, status: "pending" } — stays hidden until approved in the admin. */
+  createReview: (slug, review) => request('POST', `/products/${slug}/reviews`, review),
 };

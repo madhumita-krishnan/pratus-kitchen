@@ -7,3 +7,4 @@ share
 .env
 .env.*
 !.env.example
+qa

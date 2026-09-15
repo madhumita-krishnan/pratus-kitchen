@@ -3,6 +3,8 @@
 > Culture that performs. Clean, premium, athletic. Think Nike's confidence with an Indian kitchen's warmth.
 >
 > **Revised 2026-09-11 from client notes:** flat colour instead of gradients (cards, CTA, PDP); eyebrows lose the red dash; section rhythm tightened (`--section-y` 56–96px, head gap 24 / head→content 32, matching the story section); the hero is a static photo with a calm intro (no WebGL ripple, no slam); lineup cards are the full pack shot with the two macro chips in the top corners and a flat CTA bar; the CTA is a full-bleed red banner carrying the three brand numbers; the product page is a standard two-column PDP; “ships” is “delivered” everywhere.
+> **Revised 2026-09-15:** the hero photo asset is pre-cropped to Main hero.png (plain cover, no maths); section spacing is locked (§5); lineup CTAs are always white (§11); the How-it-works cards carry Katie's icons on the number row; the About section keeps its ink treatment with the mirror portrait (IMG_1896) instead of the pop-up photo; lineup Shop now buttons carry no arrow; the comparison table is compressed to fit one screen with a red glow on the PRATUS column; gallery captions read upwards from the bottom-left; the CTA watermark fills the whole red panel at 10% white; the PDP has Ingredients and Reviews.
+> **Revised 2026-09-15 (later):** the story portrait's bleed is a `mask-image` on the photo itself (so moving the photo moves the fade), nudged right so the founder stays clear; the nav slides away on scroll-down and returns on scroll-up (`.nav.is-hidden`); Reviews is an Amazon-style summary (average, histogram) beside a write-a-review card — no pull-quote, no “Verified order”, name on top, no product·city line — and visitors' reviews are pending until approved (`?demo=account` shows the approve/remove buttons); the PDP always opens at the top. `--section-y` is now clamp(72px, 7.5vw, 120px) and the PDP's first screen is `min-height: 100svh`, so the next section doesn't peek. Every page opens at the top: `initNav()` zeroes the review-link host's `__frame_scroll` key (it carries the last scroll position over to whichever page loads next) and turns off browser scroll restoration. **Rule: a highlight never leaves its box** — row hovers, the comparison column glow, any tint or glow stays clipped inside its container's rounded edge (inset shadows, `overflow: hidden` on the wrapper), never spilling onto the page.
 > Every value here is a CSS custom property in [`src/styles/tokens.css`](src/styles/tokens.css). Components consume tokens; they never hard-code values. Shared behaviours (reveals, counters, no-orphan glue) live in [`src/js/motion.js`](src/js/motion.js).
 
 **Contents** — 1 Principles · 2 Colour · 3 Typography · 4 Hierarchy · 5 Spacing & gutters · 6 Layout & alignment (knolling) · 7 Radii · 8 Surfaces & elevation · 9 Icons · 10 Photography · 11 Components & states · 12 Motion · 13 Interaction · 14 Accessibility · 15 Voice · 16 Files & checklist
@@ -147,13 +149,15 @@ eyebrow  →  statement (h1/h2)  →  lead (optional)  →  content  →  action
 | `--s-10` | 128 | — |
 | `--s-11` | 160 | — |
 
+**Section spacing is a rule, not a knob.** The gap between panels (`--section-y`, plus the head gaps in §4) was signed off on 2026-09-15. New sections use the same token; nothing gets its own padding.
+
 ### Page layout
 | Token | Value | Meaning |
 |---|---|---|
 | `--container` | `1440px` | Max content width |
 | `--gutter` | `clamp(20px, 4vw, 56px)` | Page edge padding (20 at 375 → 40 at 1000 → 56 at 1400+) |
 | `--gap` | `clamp(16px, 2vw, 32px)` | Between grid items and cards |
-| `--section-y` | `clamp(88px, 11vw, 176px)` | Vertical padding for every section. `.section--tight` = 60% |
+| `--section-y` | `clamp(56px, 6vw, 96px)` | Vertical padding for every section. `.section--tight` = 60%. **Locked** — approved by the client 2026-09-15; do not retune it for a single section |
 | `--nav-h` | `72px` | Fixed nav height (pills are 48px inside it) |
 
 Rules:
@@ -259,6 +263,8 @@ Rules:
 ---
 
 ## 11. Components & states
+
+**Card CTA rule (2026-09-15):** the "Shop now" / "View" button on a lineup card is always `btn--light` (white, ink text) — on the white paneer card too. Never the ink button, never red, on a card.
 
 Every interactive component has the same five states. The table lists what changes; anything not listed stays at rest values.
 

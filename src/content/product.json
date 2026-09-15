@@ -8,21 +8,43 @@
   "shippingNote": "Delivered frozen · Free delivery over $60",
   "macros": {
     "eyebrow": "Macros per meal",
-    "labels": { "cal": "calories", "protein": "protein", "carbs": "carbs", "fat": "fat" }
+    "labels": {
+      "cal": "calories",
+      "protein": "protein",
+      "carbs": "carbs",
+      "fat": "fat"
+    }
   },
   "info": {
     "eyebrow": "What’s in the pouch",
     "title": "Real food. Real macros.",
     "second": "Made in small batches, frozen at peak, and already logged in MyFitnessPal so the only thing you have to track is your lift."
   },
-  "accordions": { "details": "Details", "heating": "Heating", "delivery": "Delivery" },
+  "accordions": {
+    "details": "Details",
+    "ingredients": "Ingredients",
+    "heating": "Heating",
+    "delivery": "Delivery"
+  },
   "heating": {
     "eyebrow": "Heating instructions",
     "steps": [
-      { "label": "Pan (recommended)", "text": "Remove parchment paper and heat on a pan until warm and soft." },
-      { "label": "Quick option", "text": "Microwave each piece between a paper towel for 10–15 seconds." },
-      { "label": "Track it", "text": "Log your meal in MyFitnessPal — just search “PRATUS”." },
-      { "label": "Storage", "text": "Keep frozen." }
+      {
+        "label": "Pan (recommended)",
+        "text": "Remove parchment paper and heat on a pan until warm and soft."
+      },
+      {
+        "label": "Quick option",
+        "text": "Microwave each piece between a paper towel for 10–15 seconds."
+      },
+      {
+        "label": "Track it",
+        "text": "Log your meal in MyFitnessPal — just search “PRATUS”."
+      },
+      {
+        "label": "Storage",
+        "text": "Keep frozen."
+      }
     ]
   },
   "gallery": {
@@ -37,5 +59,26 @@
     "eyebrow": "More fuel",
     "title": "Other fuel.",
     "button": "View"
+  },
+  "reviews": {
+    "title": "Reviews",
+    "outOf": "out of 5",
+    "countLabel": "reviews",
+    "starLabel": "star",
+    "writeTitle": "Review this product",
+    "writeLead": "Share your thoughts with other athletes. Reviews go live once Pratiti has read them.",
+    "writeButton": "Write a review",
+    "fields": {
+      "name": "Name",
+      "rating": "Rating",
+      "title": "Headline",
+      "body": "Review"
+    },
+    "submit": "Post review",
+    "thanks": "Thanks — your review will show once it’s been approved.",
+    "pending": "Awaiting approval",
+    "approve": "Approve",
+    "remove": "Remove",
+    "postError": "Couldn’t post your review. Try again in a minute."
   }
 }

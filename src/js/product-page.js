@@ -3,6 +3,7 @@ import { PRODUCTS, bySlug, money } from './products.js';
 import copy from '../content/product.json';
 import { initNav, toast } from './nav.js';
 import { cart, syncBadges } from './cart.js';
+import { api, apiEnabled } from './api.js';
 
 initNav();
 
@@ -38,6 +39,7 @@ $('[data-macros]').innerHTML = [
   [p.macros.cal, '', copy.macros.labels.cal], [p.macros.protein, 'g', copy.macros.labels.protein], [p.macros.carbs, 'g', copy.macros.labels.carbs], [p.macros.fat, 'g', copy.macros.labels.fat],
 ].map(([n, unit, l], i) => `<div class="macro" data-reveal data-reveal-delay="${i * 0.08}"><div class="macro__num" data-count="${n}">0${unit ? `<small>${unit}</small>` : ''}</div><div class="macro__label">${l}</div></div>`).join('');
 
+$('[data-ingredients]').textContent = p.ingredients || '';
 $('[data-heating]').innerHTML = copy.heating.steps.map((h) => `<div class="heat__item" data-reveal><b>${h.label}</b><span>${h.text}</span></div>`).join('');
 
 $('[data-others]').innerHTML = PRODUCTS.filter((o) => o.slug !== p.slug).map((o) => `
@@ -46,9 +48,65 @@ $('[data-others]').innerHTML = PRODUCTS.filter((o) => o.slug !== p.slug).map((o)
     <div class="card__body">
       <p class="card__day">${o.day}</p>
       <h3 class="card__name">${o.name}</h3>
-      <div class="card__cta"><span class="card__price">${money(o.price)}</span><span class="btn btn--sm ${o.key === 'paneer' ? '' : 'btn--light'}">${copy.others.button}</span></div>
+      <div class="card__cta"><span class="card__price">${money(o.price)}</span><span class="btn btn--sm btn--light">${copy.others.button}</span></div>
     </div>
   </a>`).join('');
+
+// Reviews: the sample reviews plus the ones written on this page. A written review is
+// pending until the owner approves it; with the API off, both live in localStorage.
+// ponytail: `?demo=account` stands in for the owner (same switch as the account menu) — real
+// moderation happens in the backend admin, see docs/API-CONTRACT.md → reviews.
+const STARS = (n) => `<span class="stars" aria-label="${n} out of 5 stars">${'<i></i>'.repeat(5)}<b style="width:${n * 20}%">${'<i></i>'.repeat(5)}</b></span>`;
+const esc = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+const REV_KEY = 'pratus-reviews';
+const isOwner = new URLSearchParams(location.search).get('demo') === 'account';
+const local = { // reviews written in this browser: { [slug]: [{ name, stars, title, quote, status }] }
+  get: () => { try { return JSON.parse(localStorage.getItem(REV_KEY) || '{}')[p.slug] || []; } catch { return []; } },
+  set: (list) => { const all = JSON.parse(localStorage.getItem(REV_KEY) || '{}'); all[p.slug] = list; localStorage.setItem(REV_KEY, JSON.stringify(all)); },
+};
+const renderReviews = () => {
+  const mine = local.get();
+  const reviews = [...mine.filter((r) => r.status === 'approved'), ...(p.reviews || [])];
+  const shown = [...mine.filter((r) => r.status === 'pending'), ...reviews]; // the author (and the owner) still sees a pending one
+  const avg = reviews.length ? reviews.reduce((a, r) => a + r.stars, 0) / reviews.length : 0;
+  $('[data-rev-avg]').textContent = avg.toFixed(1);
+  $('[data-rev-stars]').innerHTML = STARS(avg);
+  $('[data-rev-count]').textContent = `${reviews.length} ${copy.reviews.countLabel}`;
+  $('[data-rev-bars]').innerHTML = [5, 4, 3, 2, 1].map((n) => {
+    const pct = reviews.length ? Math.round(100 * reviews.filter((r) => r.stars === n).length / reviews.length) : 0;
+    return `<li><span>${n} ${copy.reviews.starLabel}${n === 1 ? '' : 's'}</span><i style="--w:${pct}%"></i><span>${pct}%</span></li>`;
+  }).join('');
+  $('[data-reviews]').innerHTML = shown.map((r, i) => `
+    <article class="review${r.status === 'pending' ? ' review--pending' : ''}" data-reveal data-reveal-delay="${(i * 0.08).toFixed(2)}">
+      <p class="review__by"><b>${esc(r.name)}</b>${r.status === 'pending' ? `<span class="chip chip--ink">${copy.reviews.pending}</span>` : ''}</p>
+      ${STARS(r.stars)}
+      <h3 class="review__title">${esc(r.title)}</h3>
+      <div><p class="review__quote">${esc(r.quote)}</p>${r.status === 'pending' && isOwner ? `<p class="review__mod"><button class="btn btn--sm btn--primary" type="button" data-mod="approved" data-id="${r.id}">${copy.reviews.approve}</button><button class="btn btn--sm btn--ghost" type="button" data-mod="removed" data-id="${r.id}"><span>${copy.reviews.remove}</span></button></p>` : ''}</div>
+    </article>`).join('');
+  animate($('[data-reviews]'));
+};
+renderReviews();
+$('[data-reviews]').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-mod]'); if (!b) return;
+  local.set(local.get().flatMap((r) => (r.id !== b.dataset.id ? [r] : b.dataset.mod === 'approved' ? [{ ...r, status: 'approved' }] : [])));
+  renderReviews();
+});
+$('[data-review-form]').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const r = Object.fromEntries(new FormData(form));
+  r.stars = Number(r.stars);
+  const btn = form.querySelector('button[type="submit"]');
+  btn.classList.add('is-busy');
+  try {
+    if (apiEnabled) await api.createReview(p.slug, r);
+    local.set([{ ...r, id: String(Date.now()), status: 'pending' }, ...local.get()]);
+  } catch { btn.classList.remove('is-busy'); toast(copy.reviews.postError); return; }
+  btn.classList.remove('is-busy');
+  form.reset(); form.closest('details').open = false;
+  toast(copy.reviews.thanks);
+  renderReviews();
+});
 
 // quantity + add to cart (cart.js persists it; checkout.html reads it)
 let qty = 1;

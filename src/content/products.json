@@ -8,15 +8,59 @@
       "shortName": "Paneer Paratha",
       "tagline": "Press heavier and recover smarter with our push-day-ready paneer paratha.",
       "description": "A classic Punjabi flatbread stuffed with spiced, protein-rich paneer. Made to be eaten like a real meal, not a supplement — and tracked like one.",
-      "macros": { "cal": 470, "protein": 30, "carbs": 29, "fat": 26 },
+      "macros": {
+        "cal": 470,
+        "protein": 30,
+        "carbs": 29,
+        "fat": 26
+      },
       "price": 14,
       "gallery": [
-        { "cap": "Push day", "alt": "Push Day Paneer Paratha pouch held up mid-flex" },
-        { "cap": "Turf", "alt": "Paneer paratha pouch on turf with a dumbbell" },
-        { "cap": "Lane 4", "alt": "Paneer paratha pouch on the track" },
-        { "cap": "Rest day", "alt": "Founder lying on the track beside a paneer paratha pouch" },
-        { "cap": "Yard line", "alt": "Paneer paratha on the yard line" },
-        { "cap": "Founder", "alt": "Founder flexing with the paneer paratha pouch" }
+        {
+          "cap": "Push day",
+          "alt": "Push Day Paneer Paratha pouch held up mid-flex"
+        },
+        {
+          "cap": "Turf",
+          "alt": "Paneer paratha pouch on turf with a dumbbell"
+        },
+        {
+          "cap": "Lane 4",
+          "alt": "Paneer paratha pouch on the track"
+        },
+        {
+          "cap": "Rest day",
+          "alt": "Founder lying on the track beside a paneer paratha pouch"
+        },
+        {
+          "cap": "Yard line",
+          "alt": "Paneer paratha on the yard line"
+        },
+        {
+          "cap": "Founder",
+          "alt": "Founder flexing with the paneer paratha pouch"
+        }
+      ],
+      "ingredients": "Whole wheat flour, paneer (milk, citric acid), onion, green chilli, coriander, ginger, cumin, garam masala, ajwain, salt, oil.",
+      "reviews": [
+        {
+          "stars": 5,
+          "title": "Sunday paratha, push-day macros",
+          "quote": "Tastes like the one my mum makes on a Sunday, except it has 30 grams of protein and I ate it in the car after chest day.",
+          "name": "Aarav M."
+        },
+        {
+          "stars": 5,
+          "title": "Pan-warm it. Trust me.",
+          "quote": "Ninety seconds on the tawa and the paneer goes soft again. Microwave works when I’m late but the pan is the real thing.",
+          "name": "Priya S."
+        },
+        {
+          "stars": 4,
+          "title": "Filling. Almost too filling.",
+          "quote": "One paratha is a full lunch. Four stars only because I want a two-pack for the days I train twice.",
+          "name": "Daniel K."
+        }
       ]
     },
     {
@@ -26,15 +70,59 @@
       "shortName": "Rotli + Shaak",
       "tagline": "Set a new personal record starting with lunch.",
       "description": "Soft, tofu-based pr-otein rotlis paired with our Chin-Up Chana Bataka Shaak. The Gujarati home plate, rebuilt for training days.",
-      "macros": { "cal": 380, "protein": 19, "carbs": 37, "fat": 17 },
+      "macros": {
+        "cal": 380,
+        "protein": 19,
+        "carbs": 37,
+        "fat": 17
+      },
       "price": 14,
       "gallery": [
-        { "cap": "Handoff", "alt": "Rotli pouch handed off on the track" },
-        { "cap": "Turf", "alt": "Rotli pouch and shaak tub on turf with dumbbells" },
-        { "cap": "Court side", "alt": "Rotli pouch at the tennis net" },
-        { "cap": "Field", "alt": "Rotli pouch, shaak tub and dumbbell on the field" },
-        { "cap": "Rest day", "alt": "Founder on the track with rotli and shaak" },
-        { "cap": "Packed cold", "alt": "Rotli and shaak tubs packed in a cooler" }
+        {
+          "cap": "Handoff",
+          "alt": "Rotli pouch handed off on the track"
+        },
+        {
+          "cap": "Turf",
+          "alt": "Rotli pouch and shaak tub on turf with dumbbells"
+        },
+        {
+          "cap": "Court side",
+          "alt": "Rotli pouch at the tennis net"
+        },
+        {
+          "cap": "Field",
+          "alt": "Rotli pouch, shaak tub and dumbbell on the field"
+        },
+        {
+          "cap": "Rest day",
+          "alt": "Founder on the track with rotli and shaak"
+        },
+        {
+          "cap": "Packed cold",
+          "alt": "Rotli and shaak tubs packed in a cooler"
+        }
+      ],
+      "ingredients": "Rotli: whole wheat flour, tofu (soybeans, water, calcium sulphate), oil, salt. Shaak: chana (chickpeas), bataka (potato), tomato, onion, ginger, garlic, turmeric, cumin, coriander, red chilli, salt, oil.",
+      "reviews": [
+        {
+          "stars": 5,
+          "title": "The home plate, portable",
+          "quote": "Rotli and shaak in a foil pack that fits my gym bag. It’s the plate I grew up with and it logs straight into MyFitnessPal.",
+          "name": "Nisha P."
+        },
+        {
+          "stars": 5,
+          "title": "Soft rotli from frozen",
+          "quote": "I didn’t believe a tofu rotli would stay soft. Between paper towels in the microwave it comes out like fresh.",
+          "name": "Marcus L."
+        },
+        {
+          "stars": 4,
+          "title": "Shaak carries it",
+          "quote": "The chana bataka shaak is the star. I’d happily buy a tub of it on its own.",
+          "name": "Sanjana R."
+        }
       ]
     },
     {
@@ -44,23 +132,83 @@
       "shortName": "Thepla",
       "tagline": "Fuel your leg day one bite at a time.",
       "description": "A macro-tracked take on a classic Gujarati wholewheat and fenugreek flatbread. Savoury, portable, and built for the days that hurt.",
-      "macros": { "cal": 400, "protein": 21, "carbs": 39, "fat": 17 },
+      "macros": {
+        "cal": 400,
+        "protein": 21,
+        "carbs": 39,
+        "fat": 17
+      },
       "price": 12,
       "gallery": [
-        { "cap": "Turf", "alt": "Thepla pouch on turf with a dumbbell and phone" },
-        { "cap": "Blacktop", "alt": "Three thepla pouches on the blacktop" },
-        { "cap": "Yard line", "alt": "Thepla pouch beside a dumbbell on the yard line" },
-        { "cap": "Track", "alt": "Founder sitting on the track with thepla and paneer paratha" },
-        { "cap": "Rest day", "alt": "Founder on the track with a thepla pouch" },
-        { "cap": "Field", "alt": "Thepla pouch and dumbbell on the field" }
+        {
+          "cap": "Turf",
+          "alt": "Thepla pouch on turf with a dumbbell and phone"
+        },
+        {
+          "cap": "Blacktop",
+          "alt": "Three thepla pouches on the blacktop"
+        },
+        {
+          "cap": "Yard line",
+          "alt": "Thepla pouch beside a dumbbell on the yard line"
+        },
+        {
+          "cap": "Track",
+          "alt": "Founder sitting on the track with thepla and paneer paratha"
+        },
+        {
+          "cap": "Rest day",
+          "alt": "Founder on the track with a thepla pouch"
+        },
+        {
+          "cap": "Field",
+          "alt": "Thepla pouch and dumbbell on the field"
+        }
+      ],
+      "ingredients": "Whole wheat flour, fenugreek leaves (methi), yoghurt, turmeric, red chilli, cumin, sesame, ginger, garlic, salt, oil.",
+      "reviews": [
+        {
+          "stars": 5,
+          "title": "Leg-day fuel, no crash",
+          "quote": "Two thepla an hour before squats and nothing sits heavy. Savoury, warm, done in a minute.",
+          "name": "Rohan D."
+        },
+        {
+          "stars": 5,
+          "title": "Travels anywhere",
+          "quote": "Took a pack to a track meet, warmed them at the hotel. Still tasted like methi, not like cardboard.",
+          "name": "Elena V."
+        },
+        {
+          "stars": 4,
+          "title": "Wish I’d ordered more",
+          "quote": "Ate the pack in two days. That’s the review.",
+          "name": "Jay T."
+        }
       ]
     }
   ],
   "shipping": {
     "_note": "Placeholder rates. `freeOver` is the subtotal in dollars above which that method is free; null means never free.",
     "methods": [
-      { "id": "standard", "label": "Standard", "note": "Frozen, insulated. 2–3 business days.", "price": 9, "freeOver": 60, "eta": "two to three business days" },
-      { "id": "express", "label": "Express", "note": "Next business day, ordered before noon.", "price": 18, "freeOver": null, "eta": "one business day" }
+      {
+        "id": "standard",
+        "label": "Standard",
+        "note": "Frozen, insulated. 2–3 business days.",
+        "price": 9,
+        "freeOver": 60,
+        "eta": "two to three business days"
+      },
+      {
+        "id": "express",
+        "label": "Express",
+        "note": "Next business day, ordered before noon.",
+        "price": 18,
+        "freeOver": null,
+        "eta": "one business day"
+      }
     ]
-  }
+  },
+  "_ingredients": "DRAFT — ingredient lists are placeholders until Pratiti supplies the exact list from each pouch label.",
+  "_reviews": "SAMPLE — the three reviews per product are placeholders for design review; replace with real ones (or wire to the API) before launch. `stars` is 1–5. Reviews visitors write on the page are pending until Pratiti approves them (see docs/API-CONTRACT.md → reviews)."
 }
