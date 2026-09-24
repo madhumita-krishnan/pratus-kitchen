@@ -5,7 +5,7 @@
 > **Revised 2026-09-11 from client notes:** flat colour instead of gradients (cards, CTA, PDP); eyebrows lose the red dash; section rhythm tightened (`--section-y` 56–96px, head gap 24 / head→content 32, matching the story section); the hero is a static photo with a calm intro (no WebGL ripple, no slam); lineup cards are the full pack shot with the two macro chips in the top corners and a flat CTA bar; the CTA is a full-bleed red banner carrying the three brand numbers; the product page is a standard two-column PDP; “ships” is “delivered” everywhere.
 > **Revised 2026-09-15:** the hero photo asset is pre-cropped to Main hero.png (plain cover, no maths); section spacing is locked (§5); lineup CTAs are always white (§11); the How-it-works cards carry Katie's icons on the number row; the About section keeps its ink treatment with the mirror portrait (IMG_1896) instead of the pop-up photo; lineup Shop now buttons carry no arrow; the comparison table is compressed to fit one screen with a red glow on the PRATUS column; gallery captions read upwards from the bottom-left; the CTA watermark fills the whole red panel at 10% white; the PDP has Ingredients and Reviews.
 > **Revised 2026-09-15 (later):** the story portrait's bleed is a `mask-image` on the photo itself (so moving the photo moves the fade), nudged right so the founder stays clear; the nav slides away on scroll-down and returns on scroll-up (`.nav.is-hidden`); Reviews is an Amazon-style summary (average, histogram) beside a write-a-review card — no pull-quote, no “Verified order”, name on top, no product·city line — and visitors' reviews are pending until approved (`?demo=account` shows the approve/remove buttons); the PDP always opens at the top. `--section-y` is now clamp(72px, 7.5vw, 120px) and the PDP's first screen is `min-height: 100svh`, so the next section doesn't peek. Every page opens at the top: `initNav()` zeroes the review-link host's `__frame_scroll` key (it carries the last scroll position over to whichever page loads next) and turns off browser scroll restoration. **Phones (≤767px):** the comparison table fits the screen in full (compact type, smaller marks) — the PRATUS column is never off-screen; card CTA bars wrap to name / price+button rows; step cards drop the number row's desktop margin. **Rule: a highlight never leaves its box** — row hovers, the comparison column glow, any tint or glow stays clipped inside its container's rounded edge (inset shadows, `overflow: hidden` on the wrapper), never spilling onto the page.
-> Every value here is a CSS custom property in [`src/styles/tokens.css`](src/styles/tokens.css). Components consume tokens; they never hard-code values. Shared behaviours (reveals, counters, no-orphan glue) live in [`src/js/motion.js`](src/js/motion.js).
+> Every value here is a CSS custom property in [`src/styles/tokens.css`](../src/styles/tokens.css). Components consume tokens; they never hard-code values. Shared behaviours (reveals, counters, no-orphan glue) live in [`src/js/motion.js`](../src/js/motion.js).
 
 **Contents** — 1 Principles · 2 Colour · 3 Typography · 4 Hierarchy · 5 Spacing & gutters · 6 Layout & alignment (knolling) · 7 Radii · 8 Surfaces & elevation · 9 Icons · 10 Photography · 11 Components & states · 12 Motion · 13 Interaction · 14 Accessibility · 15 Voice · 16 Files & checklist
 
@@ -377,11 +377,13 @@ GSAP equivalents: `power3.out` to arrive, `power4.out` for split words, `power3.
 | Checkout line remove | Remove | Row slides 16px right and fades, 0.28s `power2.out`, then the list re-renders |
 | Order in | Place order | Busy spinner 1.4s → done panel rises 28px; the check springs in `elastic.out(1, .5)` from scale 0 / −40° |
 | Hover lifts | pointer | Buttons −2px, steps −4px, cards −6px, deck slot −32px + 1.06; shadow steps up one level |
+| Deck pull-out | hover / focus a lineup card | The slot straightens, rises 32px and scales 1.06 over 0.7s `--ease-out`, shadow to `--shadow-card-lift`; neighbours stay tilted. **Resets on every arrival:** coming back from a product page (back button, bfcache), `pageshow` drops focus and holds the deck `.is-resting` until the pointer moves, so the card you tapped slides back into the stack instead of staying pulled out |
 
 ### Rules
 - Respect `prefers-reduced-motion`: the hero shows the static photo, reveals are instant, counters show their final value, the story photo is static.
 - **No infinite or looping animation** (no marquees, bouncing scroll cues, pulsing dots). The only exceptions are the loader while loading and a busy button's spinner.
 - Entrances are one-shot (`once: true`). Nothing replays on scroll-back.
+- **Leaving resets.** A state a click put an element into (a pulled-out card, an open menu, a lifted button) never survives navigation: when the page is shown again everything is at rest, and hover only re-engages once the pointer actually moves. The user should never come back to a page that looks mid-gesture.
 - Stagger siblings, never a whole page: max stagger group is one row (≤ 4 items, ≤ 0.24s total).
 - Durations: micro feedback ≤ 200ms, hover ≤ 320ms, entrances 0.8–1.8s. Nothing longer than 2s except the loader.
 - Anything rendered after load (cards, macros) must call `animate(root)` so it gets the same reveals, counters and orphan glue.
@@ -430,7 +432,7 @@ site/
 ├─ index.html               home
 ├─ product.html             product template (reads ?p=)
 ├─ checkout.html            cart + checkout (reads cart.js)
-├─ DESIGN.md                this file
+├─ design-system/DESIGN.md  this file
 ├─ src/styles/tokens.css    all tokens
 ├─ src/styles/main.css      base + components
 ├─ src/js/motion.js         reveals, split headlines, counters, no-orphan glue (shared)

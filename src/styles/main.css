@@ -674,8 +674,9 @@ p, li, figcaption, dd { text-wrap: pretty; }
 .deck__slot:nth-child(2) { z-index: 2; }
 .deck__slot:nth-child(3) { transform: rotate(6deg) translateY(28px); z-index: 1; transform-origin: 20% 100%; }
 .deck__slot .card { transition: box-shadow 0.7s var(--ease-out); }
-.deck__slot:hover, .deck__slot:focus-within { transform: rotate(0) translateY(-32px) scale(1.06); z-index: 5; }
-.deck__slot:hover .card, .deck__slot:focus-within .card { box-shadow: var(--shadow-card-lift); }
+/* The pull-out. `.is-resting` (set on every page arrival, main.js) holds the whole deck in the stack until the pointer moves again. */
+.deck:not(.is-resting) .deck__slot:hover, .deck:not(.is-resting) .deck__slot:focus-within { transform: rotate(0) translateY(-32px) scale(1.06); z-index: 5; }
+.deck:not(.is-resting) .deck__slot:hover .card, .deck:not(.is-resting) .deck__slot:focus-within .card { box-shadow: var(--shadow-card-lift); }
 @media (max-width: 1023px) { .deck__slot { flex-basis: 44%; } .deck__slot + .deck__slot { margin-left: -4%; } }
 @media (max-width: 767px) {
   .deck { flex-direction: column; align-items: stretch; gap: var(--gap); padding-block: 0; }
@@ -683,7 +684,7 @@ p, li, figcaption, dd { text-wrap: pretty; }
   .deck__slot .card { min-height: 0; aspect-ratio: 4 / 6; } /* taller on phones so the pouch clears the text; a min-height would push the card past the viewport */
   .deck__slot + .deck__slot { margin-left: 0; }
   .deck__slot:nth-child(n) { transform: none; }
-  .deck__slot:hover, .deck__slot:focus-within { transform: none; }
+  .deck:not(.is-resting) .deck__slot:hover, .deck:not(.is-resting) .deck__slot:focus-within { transform: none; }
 }
 
 /* ==========================================================================

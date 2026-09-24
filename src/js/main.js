@@ -81,6 +81,16 @@ if (lineup) {
       <a class="card__link" href="/product.html?p=${p.slug}" aria-label="View ${p.day} ${p.name}"></a>
     </article>
     </div>`).join('');
+
+  /* Coming back from a product page, the card you tapped is still pulled out of the stack:
+     the click left it focused, and the pointer may still be over it. Every arrival (first
+     load, back button, bfcache restore) drops focus and holds the deck at rest until the
+     pointer actually moves again — then hover is live as normal. */
+  addEventListener('pageshow', () => {
+    document.activeElement?.blur?.();
+    lineup.classList.add('is-resting');
+    addEventListener('pointermove', () => lineup.classList.remove('is-resting'), { once: true });
+  });
 }
 
 /* ---- Copy-driven blocks (src/content/home.json) ------------------------

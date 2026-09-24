@@ -1,4 +1,4 @@
-// Shared motion + typography behaviours. One vocabulary for every page (DESIGN.md §8–§9).
+// Shared motion + typography behaviours. One vocabulary for every page (design-system/DESIGN.md §12).
 import { gsap } from '../vendor-gsap/index.js';
 import { ScrollTrigger } from '../vendor-gsap/ScrollTrigger.js';
 
