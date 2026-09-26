@@ -72,7 +72,7 @@ Warm greys derived from Urad Dal White: `--c-grey-100` `#E6E0E2` · `-200` `#D3C
 | Display / wordmark / headings / big numbers | **Pratus** (custom, `/fonts/Pratus-Regular.otf`) → fallback Anton | 400, ALL CAPS | `--font-display` |
 | Everything else | **Montserrat** | 500 body, 600 UI, 700 buttons/labels, 800 chips; italic 700 for the tagline only | `--font-body` |
 
-The Pratus font ships uppercase, digits and basic punctuation only. Always `text-transform: uppercase`. Units after a display number (`30g`, `90s`) render as small caps-height letters at `0.5em`.
+The Pratus font ships **A–Z, 0–9 and `. ! ’` only** — it has no `&`, `+` or `-` (measured 2026-09-26: those glyphs fall back to Anton once it loads, Impact before, so they changed shape between devices and paints). **Rule:** never set those characters raw in display type. Product names go through `display()` in `src/js/products.js` (→ `nameHtml` / `shortNameHtml`), which wraps each missing glyph in `.amp` — Montserrat 800 at 0.72em, raised 0.1em — so the ampersand in “Rotli & Shaak” is the same everywhere. Any new display-type string with one of those characters uses the same helper. Always `text-transform: uppercase`. Units after a display number (`30g`, `90s`) render as small caps-height letters at `0.5em`.
 
 ### Scale (fluid)
 | Token | Size | Used for |
@@ -254,7 +254,8 @@ Rules:
 - **Product card photos** are pre-framed by `scripts/optimize-images.mjs` (`npm run images -- cards`) to the card media box: **1.13 : 1**, pouch centred horizontally, pouch centre at **45%** of the height, pouch height **55%** of the frame. This is what makes the three products read at the same size on the deck. Add a new product by giving the script the pouch's bounding box (fractions of the oriented source); where the crop runs off the photo the edge is mirrored. The thepla source carries a wrong EXIF orientation — its sensor frame is the upright one, so it is framed with `rotate: false`.
 - **Card treatment.** The photo fills the top 68% of the card and dissolves into the product gradient with a mask (`#000 62% → transparent`). Chips sit on the photo; text sits on the gradient. Hover scales the photo to 1.08 over 1.2s.
 - **Full-bleed photo sections (About).** The portrait is pinned to the right 60% of the section at 112% height (room for parallax) and extended leftwards into solid ink with a horizontal gradient (`ink → ink 34% → 78% 48% → 28% 62% → 0 76%`); top and bottom scrims keep the section edges ink. Copy sits on the solid side, left-aligned. Below 1024 the photo stacks on top (`clamp(420px, 78vh, 640px)`) and fades into ink at the bottom; copy follows on solid ink. Never place copy over an unscrimmed photo.
-- **Hero.** `Main hero.png` treatment: the photo with a top-heavy vignette (80% → 5% top to bottom) behind the wordmark, rendered through the WebGL ripple.
+- **Hero.** `Main hero.png` treatment: the photo with a top-heavy vignette (80% → 5% top to bottom) behind the wordmark. **The asset carries the crop, not the CSS:** `hero-1200/2400.webp` are cut to the mockup's 16:9 frame by `scripts/optimize-images.mjs` (founder centred, top 69% of the shot) and the CSS is a plain `object-fit: cover` anchored to the top. Never re-frame the hero with `translate`, `height: calc()` or aspect-ratio media queries — that is how it drifted off-centre once (2026-09-26). `scripts/check-assets.mjs` fails the build if the hero files are not 16:9.
+- **Every image the pages reference must exist in `public/`.** `npm run build` runs `scripts/check-assets.mjs` first: it lists every `/img/…`, `/fonts/…`, `/brand/…` path in the HTML, JS and CSS and fails on a missing file. The How-it-works icons vanished once (2026-09-26) because a copy of the site was taken before they were added — the check makes that a build error, not a surprise on the live site.
 - **Home gallery** tiles are 4:5, even tiles offset 48px down; captions are frosted pills.
 - **Product-page gallery** photos are the six best shots per product (`GALLERY` in the script, `npm run images -- gallery`), resized to a 1600px longest side and **never cropped on desktop**: the showcase gives every photo one shared height (`clamp(440px, 72vh, 820px)`; `60vh` under 1024) and lets its width follow the 3:2 or 2:3 ratio, so portrait and landscape sit side by side. `w`/`h` in `products.js` are the real pixel sizes so the stage lays out before the images load. On phones the slides become one uniform 4:5 column per swipe and the photo is cover-cropped to it (centre), which is why every gallery shot keeps its pouch near the middle of the frame. Nothing is ever drawn on top of a gallery photo — captions live in the bar under the stage.
 - **Loader** is the real thepla (`/img/thepla-loader.webp`) clipped to a disc.
@@ -264,7 +265,9 @@ Rules:
 
 ## 11. Components & states
 
-**Card CTA rule (2026-09-15):** the "Shop now" / "View" button on a lineup card is always `btn--light` (white, ink text) — on the white paneer card too. Never the ink button, never red, on a card.
+**Card CTA rule (2026-09-15, reaffirmed 2026-09-26):** the "Shop now" / "View" button on a lineup card is always `btn--light` (white, ink text) — on the white paneer card too, with no arrow. Never the ink button, never red, on a card. The class is written once in the card template with no per-product condition.
+
+**Card name rule (2026-09-26):** the name sizes with the card, never with the viewport — `.card` is a container (`container: card / inline-size`) and `.card__name` is `clamp(1.25rem, 7.5cqi, 2.5rem)`, `line-height: 1`, `text-wrap: balance`. Under 420px of card width the price + button drop under the name (`@container card (max-width: 420px)`) so the name is never starved into a one-word column. A name must fit on two lines at every card width from 270px to 520px.
 
 Every interactive component has the same five states. The table lists what changes; anything not listed stays at rest values.
 
@@ -377,6 +380,7 @@ GSAP equivalents: `power3.out` to arrive, `power4.out` for split words, `power3.
 | Checkout line remove | Remove | Row slides 16px right and fades, 0.28s `power2.out`, then the list re-renders |
 | Order in | Place order | Busy spinner 1.4s → done panel rises 28px; the check springs in `elastic.out(1, .5)` from scale 0 / −40° |
 | Hover lifts | pointer | Buttons −2px, steps −4px, cards −6px, deck slot −32px + 1.06; shadow steps up one level |
+| About sign-off | — | “Founder / Pratiti” sits in the copy column under the paragraphs and above the button (2026-09-26); it is not a floating caption in the photo |
 | Deck pull-out | hover / focus a lineup card | The slot straightens, rises 32px and scales 1.06 over 0.7s `--ease-out`, shadow to `--shadow-card-lift`; neighbours stay tilted. **Resets on every arrival:** coming back from a product page (back button, bfcache), `pageshow` drops focus and holds the deck `.is-resting` until the pointer moves, so the card you tapped slides back into the stack instead of staying pulled out |
 
 ### Rules

@@ -29,7 +29,7 @@ const showPhoto = (i) => {
 main.src = photos[0].src; main.alt = photos[0].alt;
 thumbs.addEventListener('click', (e) => { const b = e.target.closest('[data-thumb]'); if (b) showPhoto(Number(b.dataset.thumb)); });
 $('[data-day]').textContent = p.day;
-$('[data-name]').textContent = p.name;
+$('[data-name]').innerHTML = p.nameHtml;
 $('[data-tagline]').textContent = p.tagline;
 $('[data-price]').firstChild.textContent = money(p.price);
 $('[data-description]').textContent = p.description;
@@ -48,7 +48,7 @@ $('[data-others]').innerHTML = PRODUCTS.filter((o) => o.slug !== p.slug).map((o)
     <div class="card__body">
       <div>
         <p class="card__day">${o.day}</p>
-        <h3 class="card__name">${o.name}</h3>
+        <h3 class="card__name">${o.nameHtml}</h3>
       </div>
       <div class="card__cta"><span class="card__price">${money(o.price)}</span><span class="btn btn--sm btn--light">${copy.others.button}</span></div>
     </div>

@@ -58,7 +58,7 @@ function render(u) {
   const fav = favSlug && bySlug(favSlug);
   $('[data-fav]').innerHTML = fav ? `
     <span class="line__thumb card--${fav.key}"><img src="${fav.card}" alt=""></span>
-    <span class="fav__body"><span class="line__day">${copy.fuel.favourite}</span><span class="line__name">${fav.shortName}</span></span>
+    <span class="fav__body"><span class="line__day">${copy.fuel.favourite}</span><span class="line__name">${fav.shortNameHtml}</span></span>
     <button class="btn btn--sm" type="button" data-reorder-fav="${fav.slug}">${copy.fuel.reorder}</button>` : '';
 }
 

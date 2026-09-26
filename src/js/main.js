@@ -71,7 +71,7 @@ if (lineup) {
       <div class="card__body">
         <div>
           <p class="card__day">${p.day}</p>
-          <h3 class="card__name">${p.name}</h3>
+          <h3 class="card__name">${p.nameHtml}</h3>
         </div>
         <div class="card__cta">
           <span class="card__price">${money(p.price)}</span>

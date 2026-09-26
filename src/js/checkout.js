@@ -26,7 +26,7 @@ function lineHTML(l) {
       <div class="line__thumb card--${p.key}"><img src="${p.card}" alt="" width="1400" height="933"></div>
       <div class="line__info">
         <p class="line__day">${p.day}</p>
-        <p class="line__name">${p.shortName}</p>
+        <p class="line__name">${p.shortNameHtml}</p>
         <button class="line__remove" type="button" data-remove>${copy.summary.remove}</button>
       </div>
       <div class="line__side">

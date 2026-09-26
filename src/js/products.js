@@ -22,12 +22,19 @@ const ASSETS = {
 const FILES = import.meta.env.DEV ? new URL('/', location.href) : new URL('../', import.meta.url);
 export const asset = (p) => new URL(p.replace(/^\//, ''), FILES).href;
 
+// Display type: the Pratus font has A–Z, 0–9 and . ! ’ only — no & + or -. Those fall back to
+// whatever font is next in the stack (Anton once it loads, Impact before), so a name like
+// "Rotli & Shaak" changes shape between devices and paints. Names go through display() wherever
+// they are set in the display font: the missing glyphs become a .amp span in the body font.
+export const display = (s = '') => String(s).replace(/[&+-]/g, '<span class="amp">$&</span>');
+
 export const PRODUCTS = content.products.map((p) => {
   const a = ASSETS[p.slug];
   if (!a) throw new Error(`products.json has "${p.slug}" but products.js has no assets for it`);
   return {
     ...p,
     key: a.key,
+    nameHtml: display(p.name), shortNameHtml: display(p.shortName),
     card: asset(a.card),
     hero: asset(a.hero),
     gallery: a.gallery.map(([src, [w, h]], i) => ({ ...(p.gallery?.[i] || { cap: '', alt: '' }), src: asset(src), w, h })),
@@ -35,6 +42,7 @@ export const PRODUCTS = content.products.map((p) => {
 });
 
 export const SHIPPING = content.shipping;
+
 
 export const bySlug = (slug) => PRODUCTS.find((p) => p.slug === slug);
 export const money = (n) => `$${n.toFixed(0)}`;

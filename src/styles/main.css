@@ -153,6 +153,9 @@ p, li, figcaption, dd { text-wrap: pretty; }
 .btn__arrow { width: 14px; height: 14px; transition: transform var(--dur) var(--ease-out); }
 .btn:hover .btn__arrow { transform: translateX(4px); }
 
+/* Glyphs the Pratus font lacks (& + -), set in the body font at a matched size — see display() in products.js */
+.amp { font-family: var(--font-body); font-weight: 800; font-size: 0.72em; letter-spacing: 0; vertical-align: 0.1em; }
+
 /* ==========================================================================
    Chips
    ========================================================================== */
@@ -302,6 +305,7 @@ p, li, figcaption, dd { text-wrap: pretty; }
 }
 .card {
   --card-bg: var(--c-paper); --card-fg: var(--c-ink);
+  container: card / inline-size; /* the name and the CTA bar size to the card, never to the viewport */
   position: relative; display: flex; flex-direction: column;
   border-radius: var(--r-lg); overflow: hidden; isolation: isolate;
   background: var(--card-bg); color: var(--card-fg);
@@ -327,13 +331,13 @@ p, li, figcaption, dd { text-wrap: pretty; }
   background: var(--card-bg);
 }
 .card__day { font-size: var(--text-micro); font-weight: 800; letter-spacing: var(--track-eyebrow); text-transform: uppercase; opacity: 0.85; }
-.card__name { font-family: var(--font-display); font-size: clamp(1.75rem, 2.2vw, 2.5rem); line-height: 0.9; text-transform: uppercase; margin-top: var(--s-1); }
+.card__name { font-family: var(--font-display); font-size: clamp(1.25rem, 7.5cqi, 2.5rem); line-height: 1; text-transform: uppercase; margin-top: var(--s-1); text-wrap: balance; }
 .card__cta { display: flex; align-items: center; gap: var(--s-5); flex: none; }
 .card__price { font-weight: 700; font-size: var(--text-small); letter-spacing: 0.02em; }
 .card__link { position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
 .card__link:focus-visible { outline-offset: -4px; }
 .card__cta .btn { position: relative; z-index: 3; }
-@media (max-width: 767px) { .card__body { flex-wrap: wrap; row-gap: var(--s-3); } .card__cta { flex: 1 0 100%; justify-content: flex-end; } }
+@container card (max-width: 420px) { .card__body { flex-wrap: wrap; row-gap: var(--s-3); } .card__cta { flex: 1 0 100%; justify-content: flex-end; } } /* a narrow card: price + button drop under the name instead of starving it */
 
 /* ==========================================================================
    Lifestyle gallery (horizontal scroll)
@@ -487,10 +491,9 @@ p, li, figcaption, dd { text-wrap: pretty; }
 }
 .story__copy { margin-top: var(--s-6); display: grid; gap: var(--s-4); color: var(--fg-muted); max-width: 48ch; }
 .story__copy strong { color: var(--fg); }
-.story__actions { margin-top: var(--s-7); }
-.story__credit {
-  position: absolute; right: var(--gutter); bottom: var(--s-6); z-index: 1;
-  color: var(--c-white); font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.02em; text-align: right;
+.story__actions { margin-top: var(--s-5); }
+.story__credit { /* the sign-off sits under the copy, above the button — never floating in the photo */
+  margin-top: var(--s-7); color: var(--c-white); font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.02em;
 }
 .story__credit small { display: block; font-family: var(--font-body); font-size: var(--text-micro); font-weight: 700; letter-spacing: var(--track-eyebrow); opacity: 0.8; }
 @media (max-width: 1023px) {
@@ -500,7 +503,6 @@ p, li, figcaption, dd { text-wrap: pretty; }
   .story__bg img { width: 100%; height: 100%; top: 0; right: 0; object-position: 50% 0; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 94%); mask-image: linear-gradient(180deg, #000 55%, transparent 94%); }
   .story__bg::after { display: none; }
   .story__content { margin-top: calc(var(--s-6) * -1); }
-  .story__credit { position: static; text-align: left; margin: var(--s-7) auto 0; width: min(100% - var(--gutter) * 2, var(--container)); }
 }
 
 /* ==========================================================================
